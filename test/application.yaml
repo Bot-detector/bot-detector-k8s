@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-app-config
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Bot-detector/bot-detector-k8s
+    targetRevision: HEAD
+    path: develop
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app-config
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    
+    automated:
+      selfHeal: true
+      prune: true

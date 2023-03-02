@@ -11,7 +11,7 @@ spec:
     path: test2
   destination:
     server: https://kubernetes.default.svc
-    namespace: app-config-2
+    namespace: app-config
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

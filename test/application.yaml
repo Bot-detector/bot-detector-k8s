@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Bot-detector/bot-detector-k8s
+    repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
     path: develop
   destination:

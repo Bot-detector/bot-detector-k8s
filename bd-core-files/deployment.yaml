@@ -27,17 +27,17 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dev-api
-          image: hub.osrsbotdetector.com/bot-detector/bd-api:latest
+          image: quay.io/bot_detector/bd-core-files:3299061
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
           resources:
             requests:
-              cpu: "1000m"
-              memory: "500Mi"
+              cpu: 1000m
+              memory: 500Mi
             limits:
-              cpu: "2000m"
-              memory: "3000Mi"
+              cpu: 2000m
+              memory: 3000Mi
           livenessProbe:
             httpGet:
               path: /

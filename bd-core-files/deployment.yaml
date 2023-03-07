@@ -46,5 +46,21 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 30
             initialDelaySeconds: 15
+          env:
+            - name: discord_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: discord_uri
+            - name: sql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: sql_uri
+            - name: token
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: token
       imagePullSecrets:
         - name: regcred

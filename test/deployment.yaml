@@ -17,4 +17,4 @@ spec:
           image: quay.io/therealnoob/test1:latest
           ports:
             - containerPort: 8000
-      image: $REGISTRY:a584457
+      image: $REGISTRY:5ca74b0

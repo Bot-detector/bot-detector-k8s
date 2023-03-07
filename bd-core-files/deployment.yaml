@@ -62,5 +62,3 @@ spec:
                 secretKeyRef:
                   name: core.files
                   key: token
-      imagePullSecrets:
-        - name: regcred

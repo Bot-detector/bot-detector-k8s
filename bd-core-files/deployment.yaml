@@ -44,14 +44,6 @@ spec:
             limits:
               cpu: 2000m
               memory: 3000Mi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 5000
-            failureThreshold: 3
-            periodSeconds: 60
-            timeoutSeconds: 30
-            initialDelaySeconds: 15
           env:
             - name: discord_uri
               valueFrom:

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-dev-api
+spec:
+  selector:
+    matchLabels:
+      app: bd-dev-api
+  replicas: 1
+  template:
+    metadata:
+      name: bl-dev-api-app
+      labels:
+        app: bd-dev-api
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - bd-dev-api
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: bd-dev-api
+          image: hub.osrsbotdetector.com/bot-detector/bd-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "500Mi"
+            limits:
+              cpu: "2000m"
+              memory: "3000Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            failureThreshold: 3
+            periodSeconds: 60
+            timeoutSeconds: 30
+            initialDelaySeconds: 15
+      imagePullSecrets:
+        - name: regcred

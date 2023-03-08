@@ -30,15 +30,6 @@ spec:
       containers:
         - name: bd-dev-api
           image: quay.io/bot_detector/bd-core-files:3299061
-          command: # container entrypoint
-            - "/bin/bash"
-          args: # entrypoint arguments
-            - "-c"
-            - "--"
-            - |
-              while true
-              do sleep 3600
-              done
           imagePullPolicy: Always
           ports:
             - name: api

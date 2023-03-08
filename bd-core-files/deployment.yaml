@@ -9,7 +9,7 @@ spec:
   replicas: 1
   template:
     metadata:
-      name: bl-dev-api-app
+      name: bd-dev-api
       labels:
         app: bd-dev-api
     spec:
@@ -28,15 +28,20 @@ spec:
       containers:
         - name: bd-dev-api
           image: quay.io/bot_detector/bd-core-files:3299061
-          command: 
-            - /bin/bash
-          arguments:
-            - while true
-            - do sleep 3600
-            - done
+          terminationGracePeriodSeconds: 0 # seconds to wait before forcibly killing pod
+          command: # container entrypoint
+            - "/bin/bash"
+            - "-c"
+            - "--"
+          arguments: # entrypoint arguments
+            - "while true"
+            - "do sleep 3600"
+            - "done"
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - name: api
+              containerPort: 5000
+              protocol: TCP
           resources:
             requests:
               cpu: 1000m

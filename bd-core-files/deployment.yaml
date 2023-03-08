@@ -14,7 +14,7 @@ spec:
       labels:
         app: bd-dev-api
     spec:
-      terminationGracePeriodSeconds: 0 # seconds to wait before forcibly killing pod
+      terminationGracePeriodSeconds: 30 # seconds to wait before forcibly killing pod
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

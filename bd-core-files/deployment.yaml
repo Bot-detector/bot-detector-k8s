@@ -14,7 +14,7 @@ spec:
       labels:
         app: bd-dev-api
     spec:
-      terminationGracePeriodSeconds: 0 # seconds to wait before forcibly killing pod
+      terminationGracePeriodSeconds: 0
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -29,7 +29,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dev-api
-          image: quay.io/bot_detector/bd-core-files:3299061
+          image: quay.io/bot_detector/bd-core-files:549cd38
           imagePullPolicy: Always
           ports:
             - name: api

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bd-dev-api
-          image: quay.io/bot_detector/bd-core-files:549cd38
+          image: quay.io/bot_detector/bd-core-files:bed2adc
           ports:
             - containerPort: 5000
           env:

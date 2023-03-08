@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bd-dev-api
+  namespace: app-config
 spec:
   selector:
     matchLabels:
@@ -13,6 +14,7 @@ spec:
       labels:
         app: bd-dev-api
     spec:
+      terminationGracePeriodSeconds: 0 # seconds to wait before forcibly killing pod
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -28,15 +30,15 @@ spec:
       containers:
         - name: bd-dev-api
           image: quay.io/bot_detector/bd-core-files:3299061
-          terminationGracePeriodSeconds: 0 # seconds to wait before forcibly killing pod
           command: # container entrypoint
             - "/bin/bash"
+          args: # entrypoint arguments
             - "-c"
             - "--"
-          arguments: # entrypoint arguments
-            - "while true"
-            - "do sleep 3600"
-            - "done"
+            - |
+              while true
+              do sleep 3600
+              done
           imagePullPolicy: Always
           ports:
             - name: api

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bd-dev-api
-  namespace: app-config
 spec:
   selector:
     matchLabels:
@@ -10,14 +9,12 @@ spec:
   replicas: 1
   template:
     metadata:
-      name: bd-dev-api
       labels:
         app: bd-dev-api
     spec:
       containers:
         - name: bd-dev-api
           image: quay.io/bot_detector/bd-core-files:549cd38
-          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:

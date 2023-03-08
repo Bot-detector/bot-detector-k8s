@@ -14,34 +14,12 @@ spec:
       labels:
         app: bd-dev-api
     spec:
-      terminationGracePeriodSeconds: 30 # seconds to wait before forcibly killing pod
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app
-                      operator: In
-                      values:
-                        - bd-dev-api
-                topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dev-api
           image: quay.io/bot_detector/bd-core-files:549cd38
           imagePullPolicy: Always
           ports:
-            - name: api
-              containerPort: 5000
-              protocol: TCP
-          resources:
-            requests:
-              cpu: 1000m
-              memory: 500Mi
-            limits:
-              cpu: 2000m
-              memory: 3000Mi
+            - containerPort: 5000
           env:
             - name: discord_sql_uri
               valueFrom:

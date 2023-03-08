@@ -52,11 +52,11 @@ spec:
               cpu: 2000m
               memory: 3000Mi
           env:
-            - name: discord_uri
+            - name: discord_sql_uri
               valueFrom:
                 secretKeyRef:
                   name: core.files
-                  key: discord_uri
+                  key: discord_sql_uri
             - name: sql_uri
               valueFrom:
                 secretKeyRef:

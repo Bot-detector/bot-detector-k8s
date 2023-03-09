@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bd-prd-discord
+  name: bd-discord-prd
   namespace: argo-cd
 spec:
   project: default
   source:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
-    path: bd-prd-discord
+    path: bd-discord-prdd
   destination:
     server: https://kubernetes.default.svc
-    namespace: app-config
+    namespace: prd
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

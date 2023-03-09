@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-prd-discord
+spec:
+  selector:
+    matchLabels:
+      app: bd-prd-discord
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bd-prd-discord
+    spec:
+      containers:
+        - name: bd-prd-discord
+          image: quay.io/bot_detector/bd-discord-bot:bed2adc
+          ports:
+            - containerPort: 3000
+          env:
+            - name: discord_sql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: discord_sql_uri
+            - name: sql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: sql_uri
+            - name: token
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: token

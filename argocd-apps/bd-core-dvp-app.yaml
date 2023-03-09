@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bd-core-files
+  name: bd-core-dvp
   namespace: argo-cd
 spec:
   project: default
   source:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
-    path: bd-core-files
+    path: bd-core-dvp
   destination:
     server: https://kubernetes.default.svc
     namespace: app-config

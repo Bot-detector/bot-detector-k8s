@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-dvp-api
+spec:
+  selector:
+    matchLabels:
+      app: bd-dvp-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bd-dvp-api
+    spec:
+      containers:
+        - name: bd-dvp-api
+          image: quay.io/bot_detector/bd-core-files:bed2adc
+          ports:
+            - containerPort: 5000
+          env:
+            - name: discord_sql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: discord_sql_uri
+            - name: sql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: sql_uri
+            - name: token
+              valueFrom:
+                secretKeyRef:
+                  name: core.files
+                  key: token

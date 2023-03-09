@@ -18,18 +18,33 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: discord_sql_uri
+            - name: TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: core.files
-                  key: discord_sql_uri
-            - name: sql_uri
+                  name: prd.discord
+                  key: TOKEN
+            - name: API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: core.files
-                  key: sql_uri
-            - name: token
+                  name: prd.discord
+                  key: API_TOKEN
+            - name: COMMAND_PREFIX
               valueFrom:
                 secretKeyRef:
-                  name: core.files
-                  key: token
+                  name: prd.discord
+                  key: COMMAND_PREFIX
+            - name: WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  name: prd.discord
+                  key: WEBHOOK
+            - name: API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: prd.discord
+                  key: API_URL
+            - name: SQL_URI
+              valueFrom:
+                secretKeyRef:
+                  name: prd.discord
+                  key: SQL_URI

@@ -11,6 +11,7 @@ spec:
   tls:
     - hosts:
         - myapp.therealnoob.io
+      secretName: argocd-tls
   rules:
     - host: myapp.therealnoob.io
       http:

@@ -21,30 +21,30 @@ spec:
             - name: TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: TOKEN
             - name: API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: API_TOKEN
             - name: COMMAND_PREFIX
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: COMMAND_PREFIX
             - name: WEBHOOK
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: WEBHOOK
             - name: API_URL
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: API_URL
             - name: SQL_URI
               valueFrom:
                 secretKeyRef:
-                  name: prd.discord
+                  name: bd-prd-discord-secret
                   key: SQL_URI

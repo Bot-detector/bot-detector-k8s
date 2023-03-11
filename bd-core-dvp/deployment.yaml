@@ -21,15 +21,15 @@ spec:
             - name: discord_sql_uri
               valueFrom:
                 secretKeyRef:
-                  name: core.files
+                  name: bd-dvp-api-secret
                   key: discord_sql_uri
             - name: sql_uri
               valueFrom:
                 secretKeyRef:
-                  name: core.files
+                  name: bd-dvp-api-secret
                   key: sql_uri
             - name: token
               valueFrom:
                 secretKeyRef:
-                  name: core.files
+                  name: bd-dvp-api-secret
                   key: token

@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
-    path: bd-discord-prdd
+    path: bd-discord-prd
   destination:
     server: https://kubernetes.default.svc
     namespace: prd

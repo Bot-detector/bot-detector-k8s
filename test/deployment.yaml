@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: quay.io/bot_detector/bd-test:66f1fae
+          image: quay.io/bot_detector/bd-test:d5d4843
           ports:
             - containerPort: 8000

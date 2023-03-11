@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: bd-prd-automation
-          image: quay.io/bot_detector/bd-automation:160a6cc
+          image: quay.io/bot_detector/bd-automation:cee02bc

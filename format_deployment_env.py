@@ -1,7 +1,7 @@
 import yaml
 from yaml.loader import SafeLoader
 
-file = './secrets/bd-automation-prd.yaml'
+file = './secrets/bd-scraper-prd.yaml'
 # Open the file and load the file
 with open(file) as f:
     data:dict = yaml.load(f, Loader=SafeLoader)

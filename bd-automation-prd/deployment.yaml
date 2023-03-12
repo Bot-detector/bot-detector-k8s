@@ -16,3 +16,89 @@ spec:
       containers:
         - name: bd-prd-automation
           image: quay.io/bot_detector/bd-automation:cee02bc
+          env:
+            - name: EMAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  key: EMAIL_FROM
+                  name: bd-prd-automation-secret
+            - name: EMAIL_TIPOFF
+              valueFrom:
+                secretKeyRef:
+                  key: EMAIL_TIPOFF
+                  name: bd-prd-automation-secret
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SMTP_PASSWORD
+                  name: bd-prd-automation-secret
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: SMTP_PORT
+                  name: bd-prd-automation-secret
+            - name: SMTP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  key: SMTP_SERVER
+                  name: bd-prd-automation-secret
+            - name: JMOD_TAG
+              valueFrom:
+                secretKeyRef:
+                  key: JMOD_TAG
+                  name: bd-prd-automation-secret
+            - name: SERVER_LOGIN
+              valueFrom:
+                secretKeyRef:
+                  key: SERVER_LOGIN
+                  name: bd-prd-automation-secret
+            - name: SERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SERVER_PASSWORD
+                  name: bd-prd-automation-secret
+            - name: DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE
+                  name: bd-prd-automation-secret
+            - name: SERVER_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  key: SERVER_ADDRESS
+                  name: bd-prd-automation-secret
+            - name: GRAVEYARD_WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  key: GRAVEYARD_WEBHOOK
+                  name: bd-prd-automation-secret
+            - name: CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: CONSUMER_KEY
+                  name: bd-prd-automation-secret
+            - name: CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: CONSUMER_SECRET
+                  name: bd-prd-automation-secret
+            - name: BEARER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: BEARER_TOKEN
+                  name: bd-prd-automation-secret
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: ACCESS_TOKEN
+                  name: bd-prd-automation-secret
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: ACCESS_TOKEN_SECRET
+                  name: bd-prd-automation-secret
+            - name: PATRON_WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  key: PATRON_WEBHOOK
+                  name: bd-prd-automation-secret

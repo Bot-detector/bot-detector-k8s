@@ -15,25 +15,25 @@ spec:
     spec:
       containers:
         - name: bd-prd-scraper
-          image: quay.io/bot_detector/bd-scraper:b442869
+          image: quay.io/bot_detector/bd-scraper:4eae762
           env:
-          - name: TOKEN
-            valueFrom:
-              secretKeyRef:
-                key: TOKEN
-                name: bd-prd-scraper-secret
-          - name: endpoint
-            valueFrom:
-              secretKeyRef:
-                key: endpoint
-                name: bd-prd-scraper-secret
-          - name: PROXY_DOWNLOAD_URL
-            valueFrom:
-              secretKeyRef:
-                key: PROXY_DOWNLOAD_URL
-                name: bd-prd-scraper-secret
-          - name: QUERY_SIZE
-            valueFrom:
-              secretKeyRef:
-                key: QUERY_SIZE
-                name: bd-prd-scraper-secret
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: TOKEN
+                  name: bd-prd-scraper-secret
+            - name: endpoint
+              valueFrom:
+                secretKeyRef:
+                  key: endpoint
+                  name: bd-prd-scraper-secret
+            - name: PROXY_DOWNLOAD_URL
+              valueFrom:
+                secretKeyRef:
+                  key: PROXY_DOWNLOAD_URL
+                  name: bd-prd-scraper-secret
+            - name: QUERY_SIZE
+              valueFrom:
+                secretKeyRef:
+                  key: QUERY_SIZE
+                  name: bd-prd-scraper-secret

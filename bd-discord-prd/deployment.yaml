@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-discord
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       namespace: prd

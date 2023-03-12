@@ -2,6 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: bd-dvp-api-hpa
+  namespace: dvp
 spec:
   maxReplicas: 2 # define max replica count
   minReplicas: 1 # define min replica count

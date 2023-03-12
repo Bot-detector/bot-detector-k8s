@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bd-prd-api
+  namespace: prd
 spec:
   selector:
     matchLabels:

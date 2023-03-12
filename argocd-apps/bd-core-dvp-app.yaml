@@ -11,7 +11,7 @@ spec:
     path: bd-core-dvp
   destination:
     server: https://kubernetes.default.svc
-    namespace: dvp
+    namespace: bd-dvp
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

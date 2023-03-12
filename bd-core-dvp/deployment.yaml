@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bd-dvp-api
-  namespace: dvp
+  namespace: bd-dvp
 spec:
   selector:
     matchLabels:

@@ -11,7 +11,7 @@ spec:
     path: bd-discord-prd
   destination:
     server: https://kubernetes.default.svc
-    namespace: prd
+    namespace: bd-prd
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

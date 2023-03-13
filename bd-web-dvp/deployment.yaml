@@ -18,3 +18,14 @@ spec:
           image: quay.io/bot_detector/bd-web:a9d07b6
           ports:
             - containerPort: 8081
+          env:
+            - name: VITE_BOTDETECTOR_API_URL
+              valueFrom:
+                secretKeyRef:
+                  key: VITE_BOTDETECTOR_API_URL
+                  name: bd-dvp-web-secret
+            - name: VITE_RUNELITE_API_URL
+              valueFrom:
+                secretKeyRef:
+                  key: VITE_RUNELITE_API_URL
+                  name: bd-dvp-web-secret

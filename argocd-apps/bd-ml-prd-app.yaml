@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bd-ml-prd
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
+    targetRevision: HEAD
+    path: bd-ml-prd
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bd-prd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    
+    automated:
+      selfHeal: true
+      prune: true

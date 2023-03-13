@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-prd-ml
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: bd-prd-ml
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: bd-prd-ml
+    spec:
+      containers:
+        - name: bd-prd-ml
+          image: quay.io/bot_detector/bd-ml:cee02bc

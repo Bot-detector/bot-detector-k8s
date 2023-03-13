@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:cee02bc
+          image: quay.io/bot_detector/bd-ml:8ffadb0
           env:
             - name: token
               valueFrom:
@@ -32,3 +32,4 @@ spec:
                 secretKeyRef:
                   key: secret_token
                   name: bd-prd-ml-secret
+

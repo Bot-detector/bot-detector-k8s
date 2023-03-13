@@ -16,3 +16,19 @@ spec:
       containers:
         - name: bd-prd-ml
           image: quay.io/bot_detector/bd-ml:cee02bc
+          env:
+            - name: token
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: bd-prd-ml-secret
+            - name: api
+              valueFrom:
+                secretKeyRef:
+                  key: api
+                  name: bd-prd-ml-secret
+            - name: secret_token
+              valueFrom:
+                secretKeyRef:
+                  key: secret_token
+                  name: bd-prd-ml-secret

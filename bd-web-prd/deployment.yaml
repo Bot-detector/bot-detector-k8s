@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-prd-web
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: bd-prd-web
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: bd-prd-web
+    spec:
+      containers:
+        - name: bd-prd-web
+          image: quay.io/bot_detector/bd-web
+          ports:
+            - 8080

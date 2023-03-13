@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bd-dvp-api-service
+  namespace: bd-dvp
+spec:
+  selector:
+    app: bd-dvp-api
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080

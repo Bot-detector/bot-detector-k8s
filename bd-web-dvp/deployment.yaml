@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-dvp-web
+  namespace: bd-dvp
+spec:
+  selector:
+    matchLabels:
+      app: bd-dvp-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bd-dvp-web
+    spec:
+      containers:
+        - name: bd-dvp-web
+          image: quay.io/bot_detector/bd-web
+          ports:
+            - 8081

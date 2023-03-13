@@ -17,4 +17,4 @@ spec:
         - name: bd-prd-web
           image: quay.io/bot_detector/bd-web
           ports:
-            - 8080
+            - containerPort: 8080

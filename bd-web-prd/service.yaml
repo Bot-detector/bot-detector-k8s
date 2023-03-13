@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bd-dvp-api-service
-  namespace: bd-dvp
+  name: bd-prd-web-service
+  namespace: bd-prd
 spec:
   selector:
-    app: bd-dvp-api
+    app: bd-prd-web
   ports:
     - port: 8080
       protocol: TCP

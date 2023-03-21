@@ -17,7 +17,7 @@ spec:
         - name: bd-prd-api
           image: quay.io/bot_detector/bd-core-files:b442869
           ports:
-            - containerPort: 4000
+            - containerPort: 5000
           env:
             - name: discord_sql_uri
               valueFrom:

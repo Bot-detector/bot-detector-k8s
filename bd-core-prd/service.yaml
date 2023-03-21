@@ -7,6 +7,6 @@ spec:
   selector:
     app: bd-prd-api
   ports:
-    - port: 4000
+    - port: 5000 #  the container port exposed by a pod or deployment,
       protocol: TCP
-      targetPort: 4000
+      targetPort: 4000 # the port on the host machine that traffic is directed to

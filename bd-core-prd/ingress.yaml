@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - api.prd.osrsbotdetector.com
-      secretName: argocd-tls
+      secretName: api-tls
   rules:
     - host: api.prd.osrsbotdetector.com
       http:

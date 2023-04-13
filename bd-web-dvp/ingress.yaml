@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - web.dev.osrsbotdetector.com
-      secretName: argocd-tls
+      secretName: web-tls
   rules:
     - host: web.dev.osrsbotdetector.com
       http:

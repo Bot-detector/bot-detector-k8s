@@ -8,7 +8,7 @@ spec:
   selector:
     app: bd-prd-api
   ports:
-    - port: 5000 #  the container port exposed by a pod or deployment,
+    - name: prd-api-port # alias listening
+      port: 5000 #  [listening] the container port exposed by a pod or deployment,
       protocol: TCP
-      targetPort: 4000 # the port on the host machine that traffic is directed to
-      name: prd-api-port
+      targetPort: prd-api-port # [sending] the port on the host machine that traffic is directed to

@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bd-prd-web-ingress
-  namespace: bd-prd
+  name: bd-dvp-web-ingress
+  namespace: bd-dvp
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: bd-prd-api-service
+                name: bd-dvp-web-service
                 port:
                   name: web-port

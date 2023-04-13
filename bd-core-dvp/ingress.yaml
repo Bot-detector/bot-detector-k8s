@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bd-dvp-api-ingress
+  namespace: bd-dvp
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.dev.osrsbotdetector.com
+      secretName: argocd-tls
+  rules:
+    - host: api.dev.osrsbotdetector.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-dvp-api-service
+                port:
+                  name: dvp-api-port

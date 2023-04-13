@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-dvp-web
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -17,7 +17,8 @@ spec:
         - name: bd-dvp-web
           image: quay.io/bot_detector/bd-web:0fceb8a
           ports:
-            - containerPort: 8081
+            - name: web-port
+              containerPort: 8081
           env:
             - name: VITE_BOTDETECTOR_API_URL
               valueFrom:

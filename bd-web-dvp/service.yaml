@@ -8,6 +8,6 @@ spec:
     app: bd-dvp-web
   ports:
     - name: web-port
-      port: 8081
+      port: 8000
       protocol: TCP
       targetPort: web-port

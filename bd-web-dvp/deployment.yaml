@@ -18,7 +18,7 @@ spec:
           image: quay.io/bot_detector/bd-web:0fceb8a
           ports:
             - name: web-port
-              containerPort: 8081
+              containerPort: 8000
           env:
             - name: TOKEN
               valueFrom:

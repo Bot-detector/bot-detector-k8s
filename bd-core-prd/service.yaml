@@ -4,9 +4,11 @@ metadata:
   name: bd-prd-api-service
   namespace: bd-prd
 spec:
+  type: ClusterIP
   selector:
     app: bd-prd-api
   ports:
     - port: 5000 #  the container port exposed by a pod or deployment,
       protocol: TCP
       targetPort: 4000 # the port on the host machine that traffic is directed to
+      name: prd-api-port

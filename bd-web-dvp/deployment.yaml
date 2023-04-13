@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app: bd-dvp-web
   replicas: 1
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:

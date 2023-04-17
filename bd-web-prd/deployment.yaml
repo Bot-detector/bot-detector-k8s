@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-web
-          image: quay.io/bot_detector/bd-web:1a22880
+          image: quay.io/bot_detector/bd-web:2f33570
           ports:
             - name: prd-web-port
               containerPort: 8000
@@ -26,4 +26,3 @@ spec:
                 secretKeyRef:
                   key: TOKEN
                   name: bd-prd-web-secret
-

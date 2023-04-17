@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-api
-          image: quay.io/bot_detector/bd-core-files:4a31900
+          image: quay.io/bot_detector/bd-core-files:d3ce1f1
           ports:
             - name: prd-api-port
               containerPort: 5000

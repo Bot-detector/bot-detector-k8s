@@ -7,7 +7,7 @@ spec:
   selector:
     app: bd-prd-web
   ports:
-    - name: web-port
-      port: 8080
+    - name: prd-web-port
+      port: 8000
       protocol: TCP
-      targetPort: web-port
+      targetPort: prd-web-port

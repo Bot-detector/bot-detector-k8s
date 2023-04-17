@@ -21,4 +21,4 @@ spec:
               service:
                 name: bd-prd-web-service
                 port:
-                  name: web-port
+                  name: prd-web-port

@@ -5,6 +5,7 @@ metadata:
   namespace: bd-dvp
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
@@ -15,7 +16,14 @@ spec:
     - host: api.dev.osrsbotdetector.com
       http:
         paths:
-          - path: /
+          - path: /docs(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-dvp-api-service
+                port:
+                  name: dvp-api-port
+          - path: /(/|$)(.*)
             pathType: Prefix
             backend:
               service:

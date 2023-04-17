@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-web
-          image: quay.io/bot_detector/bd-web:a9d07b6
+          image: quay.io/bot_detector/bd-web:1a22880
           ports:
             - containerPort: 8080
           env:

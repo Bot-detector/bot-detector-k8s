@@ -21,4 +21,4 @@ spec:
               service:
                 name: bd-dvp-web-service
                 port:
-                  name: web-port
+                  name: dvp-web-port

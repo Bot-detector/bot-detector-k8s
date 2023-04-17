@@ -18,7 +18,7 @@ spec:
         - name: bd-dvp-web
           image: quay.io/bot_detector/bd-web:0761e26
           ports:
-            - name: web-port
+            - name: dvp-web-port
               containerPort: 8000
           env:
             - name: TOKEN

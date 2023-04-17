@@ -7,7 +7,7 @@ spec:
   selector:
     app: bd-dvp-web
   ports:
-    - name: web-port
+    - name: dvp-web-port
       port: 8000
       protocol: TCP
-      targetPort: web-port
+      targetPort: dvp-web-port

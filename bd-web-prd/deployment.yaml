@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-web
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -17,15 +17,12 @@ spec:
         - name: bd-prd-web
           image: quay.io/bot_detector/bd-web:1a22880
           ports:
-            - containerPort: 8080
+            - name: web-port
+              containerPort: 8080
           env:
-            - name: VITE_BOTDETECTOR_API_URL
+            - name: TOKEN
               valueFrom:
                 secretKeyRef:
-                  key: VITE_BOTDETECTOR_API_URL
-                  name: bd-dvp-web-secret
-            - name: VITE_RUNELITE_API_URL
-              valueFrom:
-                secretKeyRef:
-                  key: VITE_RUNELITE_API_URL
-                  name: bd-dvp-web-secret
+                  key: TOKEN
+                  name: bd-prd-web-secret
+

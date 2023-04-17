@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bd-prd-web-ingress
+  namespace: bd-prd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - web.prd.osrsbotdetector.com
+      secretName: web-tls
+  rules:
+    - host: web.prd.osrsbotdetector.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: web-port

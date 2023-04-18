@@ -17,6 +17,12 @@ spec:
       containers:
         - name: bd-prd-scraper
           image: quay.io/bot_detector/bd-scraper:1206483
+          resources:
+            requests:
+              cpu: 1
+              memory: 5Gi
+            limits:
+              memory: 10Gi
           env:
             - name: TOKEN
               valueFrom:

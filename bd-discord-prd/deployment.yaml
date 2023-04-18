@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:b7bb9e9
+          image: quay.io/bot_detector/bd-discord-bot:9844a3d
           ports:
             - containerPort: 3000
           env:

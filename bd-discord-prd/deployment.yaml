@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-discord
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:7121ebc
+          image: quay.io/bot_detector/bd-discord-bot:a21b4c4
           ports:
             - containerPort: 3000
           env:

@@ -9,9 +9,9 @@ metadata:
     nginx.ingress.kubernetes.io/client-body-buffer-size: 4m
     nginx.ingress.kubernetes.io/proxy-body-size: 4m
     # during database congenstion some requests could take longer
-    #nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
-    #nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-    #nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx

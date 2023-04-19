@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bd-prd-root-ingress
+  namespace: bd-prd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    # POST /v1/report can be quite large
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 4m
+    nginx.ingress.kubernetes.io/proxy-body-size: 4m
+    # during database congenstion some requests could take longer
+    #nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    #nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    #nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - osrsbotdetector.com
+        - www.osrsbotdetector.com
+      secretName: temp-root-tls
+  rules:
+    - host: www.osrsbotdetector.com
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: prd-web-port
+    - host: osrsbotdetector.com
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: prd-web-port

@@ -10,9 +10,31 @@ spec:
   tls:
     - hosts:
         - web.prd.osrsbotdetector.com
+        - www.osrsbotdetector.com
+        - osrsbotdetector.com
       secretName: web-tls
   rules:
     - host: web.prd.osrsbotdetector.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: prd-web-port
+    - host: www.osrsbotdetector.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: prd-web-port
+    - host: osrsbotdetector.com
       http:
         paths:
           - path: /

@@ -5,6 +5,7 @@ metadata:
   namespace: bd-dvp
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
 spec:
   ingressClassName: nginx
   tls:

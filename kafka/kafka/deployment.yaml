@@ -15,13 +15,14 @@ spec:
         app: kafka-deployment
     spec:
       containers:
-      - name: kafka
-        image: ubuntu/kafka:edge
-        env:
-          - name: ZOOKEEPER_HOST
-            value: zookeeper-service
-        args: ["/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://kafka-service:9092"]
-        ports:
-        - name: kafka-port
-          containerPort: 9092
-          protocol: TCP
+        - name: kafka
+          image: ubuntu/kafka:edge
+          env:
+            - name: ZOOKEEPER_HOST
+              value: zookeeper-service
+          args: ["/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://kafka-service:9092"]
+          ports:
+          - name: kafka-port
+            containerPort: 9092
+            protocol: TCP
+      

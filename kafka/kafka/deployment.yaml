@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: ubuntu/kafka:edge
+        env:
+          - name: ZOOKEEPER_HOST
+            value: zookeeper-service
+        args: ["/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://kafka-service:9092"]
+        ports:
+        - containerPort: 9092
+          name: kafka
+          protocol: TCP

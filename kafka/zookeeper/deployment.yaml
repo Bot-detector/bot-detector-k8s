@@ -2,20 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zookeeper-deployment
+  namespace: kafka
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: zookeeper
+      app: zookeeper-deployment
   template:
     metadata:
       labels:
-        app: zookeeper
+        app: zookeeper-deployment
     spec:
       containers:
-      - name: zookeeper
-        image: ubuntu/zookeeper:edge
-        ports:
-        - containerPort: 2181
-          name: zookeeper
-          protocol: TCP
+        - name: zookeeper
+          image: ubuntu/zookeeper:edge
+          ports:
+            - name: zookeeper-port
+              containerPort: 2181
+              protocol: TCP

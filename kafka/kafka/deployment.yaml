@@ -2,15 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-deployment
+  namespace: kafka
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: kafka
+      app: kafka-deployment
   template:
     metadata:
       labels:
-        app: kafka
+        app: kafka-deployment
     spec:
       containers:
       - name: kafka
@@ -20,6 +22,6 @@ spec:
             value: zookeeper-service
         args: ["/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://kafka-service:9092"]
         ports:
-        - containerPort: 9092
-          name: kafka
+        - name: kafka-port
+          containerPort: 9092
           protocol: TCP

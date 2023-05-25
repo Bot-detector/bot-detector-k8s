@@ -16,13 +16,24 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: ubuntu/kafka:edge
+          image: bitnami/kafka:latest
           env:
-            - name: ZOOKEEPER_HOST
-              value: zookeeper-service
-          args: ["/etc/kafka/server.properties", "--override", "advertised.listeners=PLAINTEXT://kafka-service:9092"]
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+            - name: KAFKA_CFG_LISTENERS
+              value: "PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094"
+            - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+              value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: "PLAINTEXT://$(POD_NAME).kafka:9092,EXTERNAL://localhost:9094"
+          volumeMounts:
+            - name: kafka-data
+              mountPath: /bitnami/kafka
           ports:
-          - name: kafka-port
-            containerPort: 9092
-            protocol: TCP
+            - containerPort: 9092
+              name: kafka
+            - containerPort: 9093
+              name: kafka-controller
+            - containerPort: 9094
+              name: kafka-external
       

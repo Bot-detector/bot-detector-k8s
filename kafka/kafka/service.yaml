@@ -7,7 +7,7 @@ spec:
   selector:
     app: kafka-deployment
   ports:
-    - name: kafka-port
-      port: 9092
+    - name: kafka-external
+      port: 9094
       protocol: TCP
-      targetPort: kafka-port
+      targetPort: kafka-external

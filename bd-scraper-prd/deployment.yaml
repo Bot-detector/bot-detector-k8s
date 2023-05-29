@@ -29,10 +29,10 @@ spec:
                 secretKeyRef:
                   key: TOKEN
                   name: bd-prd-scraper-secret
-            - name: endpoint
+            - name: ENDPOINT
               valueFrom:
                 secretKeyRef:
-                  key: endpoint
+                  key: ENDPOINT
                   name: bd-prd-scraper-secret
             - name: PROXY_DOWNLOAD_URL
               valueFrom:

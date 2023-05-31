@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-scraper
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -22,7 +22,7 @@ spec:
               cpu: 1
               memory: .5Gi
             limits:
-              memory: 2Gi
+              memory: 1Gi
           env:
             - name: TOKEN
               valueFrom:

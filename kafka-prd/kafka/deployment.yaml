@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka-deployment
+  name: bd-prd-kafka
   namespace: kafka
 spec:
   replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: kafka-deployment
+      app: bd-prd-kafka
   template:
     metadata:
       labels:
-        app: kafka-deployment
+        app: bd-prd-kafka
     spec:
       containers:
         - name: kafka

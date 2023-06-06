@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-prd-kafdrop
+  namespace: kafka
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: bd-prd-kafdrop
+  template:
+    metadata:
+      labels:
+        app: bd-prd-kafdrop
+    spec:
+      containers:
+        - name: kafdrop
+          image: obsidiandynamics/kafdrop:latest
+          env:
+            - name: KAFKA_BROKERCONNECT
+              value: "kafka:9092"
+            - name: JVM_OPTS
+              value: "-Xms32M -Xmx64M"
+            - name: SERVER_SERVLET_CONTEXTPATH
+              value: "/"
+          ports:
+            - containerPort: 9000
+              name: kafdrop-port

@@ -26,9 +26,6 @@ spec:
               value: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
               value: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
-          volumeMounts:
-            - name: kafka-data
-              mountPath: /bitnami/kafka
           ports:
             - containerPort: 9092
               name: kafka

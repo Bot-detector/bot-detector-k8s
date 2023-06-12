@@ -19,7 +19,7 @@ spec:
           image: obsidiandynamics/kafdrop:latest
           env:
             - name: KAFKA_BROKERCONNECT
-              value: "kafka:9092"
+              value: bd-prd-kafka-service.bd-prd.svc:9094 #bd-prd-api-service.bd-prd.svc:5000
             - name: JVM_OPTS
               value: "-Xms32M -Xmx64M"
             - name: SERVER_SERVLET_CONTEXTPATH

@@ -29,18 +29,14 @@ spec:
                 secretKeyRef:
                   key: TOKEN
                   name: bd-prd-scraper-secret
-            - name: ENDPOINT
-              valueFrom:
-                secretKeyRef:
-                  key: ENDPOINT
-                  name: bd-prd-scraper-secret
             - name: PROXY_DOWNLOAD_URL
               valueFrom:
                 secretKeyRef:
                   key: PROXY_DOWNLOAD_URL
                   name: bd-prd-scraper-secret
+            - name: ENDPOINT
+              value: http://bd-prd-api-service.bd-prd.svc:5000
             - name: QUERY_SIZE
-              valueFrom:
-                secretKeyRef:
-                  key: QUERY_SIZE
-                  name: bd-prd-scraper-secret
+              value: 5000
+            - name: KAFKA_HOST
+              value: http://bd-prd-kafka-service.kafka.svc:9094

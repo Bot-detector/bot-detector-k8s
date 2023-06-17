@@ -17,6 +17,8 @@ spec:
       containers:
         - name: bd-prd-scraper
           image: quay.io/bot_detector/bd-scraper:d27cb70
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
           resources:
             requests:
               cpu: 1

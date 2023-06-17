@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-scraper
-          image: quay.io/bot_detector/bd-scraper:e05c17c
+          image: quay.io/bot_detector/bd-scraper:d27cb70
           resources:
             requests:
               cpu: 1
@@ -37,6 +37,6 @@ spec:
             - name: ENDPOINT
               value: bd-prd-api-service.bd-prd.svc:5000
             - name: QUERY_SIZE
-              value: "5000"
+              value: '5000'
             - name: KAFKA_HOST
               value: bd-prd-kafka-service.kafka.svc:9094

@@ -11,7 +11,7 @@ spec:
       port: 9094
       protocol: TCP
       targetPort: kafka-external
----------------------------------
+---
 apiVersion: v1
 kind: Service
 metadata:

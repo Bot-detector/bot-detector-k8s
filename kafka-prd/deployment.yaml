@@ -25,7 +25,7 @@ spec:
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: PLAINTEXT://bd-prd-kafka.kafka:9092,EXTERNAL://localhost:9094
+              value: PLAINTEXT://bd-prd-kafka.kafka:9092,EXTERNAL://bd-prd-kafka.kafka:9094
           ports:
             - containerPort: 9092
               name: kafka

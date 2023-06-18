@@ -41,7 +41,7 @@ spec:
                   key: PROXY_DOWNLOAD_URL
                   name: bd-prd-scraper-secret
             - name: ENDPOINT
-              value: bd-prd-api-service.bd-prd.svc:5000
+              value: http://bd-prd-api-service.bd-prd.svc:5000
             - name: QUERY_SIZE
               value: '5000'
             - name: KAFKA_HOST

@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-scraper
-  replicas: 0
+  replicas: 2
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-scraper
-          image: quay.io/bot_detector/bd-scraper:e4edfea
+          image: quay.io/bot_detector/bd-scraper:46c645c
           resources:
             requests:
               cpu: 1
@@ -37,6 +37,6 @@ spec:
             - name: ENDPOINT
               value: http://bd-prd-api-service.bd-prd.svc:5000
             - name: QUERY_SIZE
-              value: '1000'
+              value: '10000'
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092

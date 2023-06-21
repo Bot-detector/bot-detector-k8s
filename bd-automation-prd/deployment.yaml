@@ -103,3 +103,5 @@ spec:
                 secretKeyRef:
                   key: PATRON_WEBHOOK
                   name: bd-prd-automation-secret
+            - name: KAFKA_HOST
+              value: kafka-service.kafka.svc:9092

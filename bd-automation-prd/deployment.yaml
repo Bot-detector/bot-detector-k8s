@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-automation
-          image: quay.io/bot_detector/bd-automation:c51ab72
+          image: quay.io/bot_detector/bd-automation:543bc71
           env:
             - name: EMAIL_FROM
               valueFrom:

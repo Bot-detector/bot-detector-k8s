@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-automation
-          image: quay.io/bot_detector/bd-automation:e25a11d
+          image: quay.io/bot_detector/bd-automation:3551a72
           env:
             - name: EMAIL_FROM
               valueFrom:
@@ -105,3 +105,11 @@ spec:
                   name: bd-prd-automation-secret
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
+
+            - name: ENDPOINT
+              value: http://bd-prd-api-service.bd-prd.svc:5000
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: API_TOKEN
+                  name: bd-prd-automation-secret

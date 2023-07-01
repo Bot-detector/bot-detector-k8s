@@ -112,3 +112,5 @@ spec:
                 secretKeyRef:
                   key: API_TOKEN
                   name: bd-prd-automation-secret
+            - name: BATCH_SIZE
+              value: 5000

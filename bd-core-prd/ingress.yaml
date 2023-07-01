@@ -6,6 +6,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
+    nginx.ingress.kubernetes.io/global-rate-limit: '100'
+    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
 spec:
   ingressClassName: nginx
   tls:

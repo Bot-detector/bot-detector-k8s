@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-automation
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -113,4 +113,4 @@ spec:
                   key: API_TOKEN
                   name: bd-prd-automation-secret
             - name: BATCH_SIZE
-              value: '5000'
+              value: '1500'

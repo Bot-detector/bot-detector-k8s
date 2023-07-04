@@ -5,10 +5,17 @@ metadata:
   namespace: argo-cd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
-    targetRevision: HEAD
-    path: test
+  sources:
+    - repoURL: https://github.com/Bot-detector/bot-detector-k8s
+      targetRevision: HEAD
+      ref: bot-detector-k8s
+    - chart: hello-world
+      repoURL: https://helm.github.io/examples
+      targetRevision: 0.1.0
+      helm:
+        releaseName: test-chart
+        valueFiles:
+          - $bot-detector-k8s/test/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: test

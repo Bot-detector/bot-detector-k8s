@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/Bot-detector/bot-detector-k8s
+    - repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
       targetRevision: HEAD
       ref: bot-detector-k8s
     - chart: hello-world

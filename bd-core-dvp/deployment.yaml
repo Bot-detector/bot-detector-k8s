@@ -36,3 +36,5 @@ spec:
                 secretKeyRef:
                   name: bd-dvp-api-secret
                   key: token
+            - name: kafka_url
+              value: kafka-service.kafka.svc:9092

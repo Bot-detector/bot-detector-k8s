@@ -35,4 +35,10 @@ spec:
               name: kafka-ctrl
             - containerPort: 9094
               name: kafka-external
-      
+          volumeMounts:
+            - name: kafka-data-volume
+              mountPath: /bitnami/kafka
+      volumes:
+        - name: kafka-data-volume
+          persistentVolumeClaim:
+            claimName: kafka-data

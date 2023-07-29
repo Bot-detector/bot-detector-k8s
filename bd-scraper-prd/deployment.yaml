@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-scraper
-          image: quay.io/bot_detector/bd-scraper:3fc8f62
+          image: quay.io/bot_detector/bd-scraper:fb89afc
           resources:
             requests:
               cpu: 500m

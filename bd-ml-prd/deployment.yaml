@@ -24,10 +24,7 @@ spec:
                   key: token
                   name: bd-prd-ml-secret
             - name: api
-              valueFrom:
-                secretKeyRef:
-                  key: api
-                  name: bd-prd-ml-secret
+              value: http://bd-dvp-api-service.bd-dvp.svc:5000
             - name: secret_token
               valueFrom:
                 secretKeyRef:

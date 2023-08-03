@@ -32,14 +32,14 @@ spec:
             - name: KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE
               value: "false"
             # this config is needed for kraft?
-            - name: KAFKA_CFG_NODE_ID
-              value: 0
-            - name: KAFKA_CFG_PROCESS_ROLES
-              value: controller,broker
-            - name: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS
-              value: 0@kafka:9093
-            - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
-              value: CONTROLLER
+            # - name: KAFKA_CFG_NODE_ID
+            #   value: 0
+            # - name: KAFKA_CFG_PROCESS_ROLES
+            #   value: controller,broker
+            # - name: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS
+            #   value: 0@kafka:9093
+            # - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
+            #   value: CONTROLLER
   
           ports:
             - containerPort: 9092

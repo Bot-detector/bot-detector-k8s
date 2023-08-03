@@ -40,7 +40,7 @@ spec:
               name: kafka-external
           volumeMounts:
             - name: kafka-data-volume
-              mountPath: /bitnami/kafka
+              mountPath: /bitnami/kafka/data
       volumes:
         - name: kafka-data-volume
           persistentVolumeClaim:

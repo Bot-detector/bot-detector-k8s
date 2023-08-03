@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:12a7928
+          image: quay.io/bot_detector/bd-core-files:a19e22d
           ports:
             - name: dvp-api-port
               containerPort: 5000

@@ -17,9 +17,9 @@ spec:
       containers:
         - name: kafka
           image: bitnami/kafka:3.5.1-debian-11-r3
-          securityContext:
-            runAsUser: 0  # Set to 0 for root user
-            runAsGroup: 0 # Set to 0 for root group
+          # securityContext:
+          #   runAsUser: 0  # Set to 0 for root user
+          #   runAsGroup: 0 # Set to 0 for root group
           env:
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"
@@ -48,10 +48,10 @@ spec:
               name: kafka-ctrl
             - containerPort: 9094
               name: kafka-external
-          volumeMounts:
-            - name: kafka-data-volume
-              mountPath: /bitnami/kafka/data
-      volumes:
-        - name: kafka-data-volume
-          persistentVolumeClaim:
-            claimName: kafka-data
+      #     volumeMounts:
+      #       - name: kafka-data-volume
+      #         mountPath: /bitnami/kafka/data
+      # volumes:
+      #   - name: kafka-data-volume
+      #     persistentVolumeClaim:
+      #       claimName: kafka-data

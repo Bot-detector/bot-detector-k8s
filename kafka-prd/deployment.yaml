@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: bitnami/kafka:latest
+          image: bitnami/kafka::3.5.0
           # securityContext:
           #   runAsUser: 0  # Set to 0 for root user
           #   runAsGroup: 0 # Set to 0 for root group

@@ -17,9 +17,6 @@ spec:
       containers:
         - name: bd-prd-scraper
           image: quay.io/bot_detector/bd-scraper:0782fd7
-          securityContext:
-            runAsUser: 0  # Set to 0 for root user
-            runAsGroup: 0 # Set to 0 for root group
           resources:
             requests:
               cpu: 500m

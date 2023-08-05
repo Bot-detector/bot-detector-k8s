@@ -38,3 +38,17 @@ spec:
                   key: token
             - name: kafka_url
               value: kafka-service.kafka.svc:9092
+          livenessProbe:
+            httpGet:
+              path: /
+              port: dvp-api-port
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            successThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: dvp-api-port
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            successThreshold: 3

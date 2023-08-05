@@ -42,13 +42,15 @@ spec:
             httpGet:
               path: /
               port: dvp-api-port
-            initialDelaySeconds: 30
-            periodSeconds: 3
+            initialDelaySeconds: 60
+            periodSeconds: 15
             successThreshold: 1 # must be one for liveness & startup
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /
               port: dvp-api-port
-            initialDelaySeconds: 30
-            periodSeconds: 3
+            initialDelaySeconds: 60
+            periodSeconds: 15
             successThreshold: 3
+            timeoutSeconds: 5

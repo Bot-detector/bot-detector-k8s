@@ -47,13 +47,13 @@ spec:
             httpGet:
               path: /
               port: prd-api-port
-            initialDelaySeconds: 3
+            initialDelaySeconds: 30
             periodSeconds: 3
             successThreshold: 1 # must be one for liveness & startup
           readinessProbe:
             httpGet:
               path: /
               port: prd-api-port
-            initialDelaySeconds: 3
+            initialDelaySeconds: 30
             periodSeconds: 3
             successThreshold: 3

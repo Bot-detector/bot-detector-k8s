@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:7f9a90d
+          image: quay.io/bot_detector/bd-core-files:16ee323
           ports:
             - name: dvp-api-port
               containerPort: 5000
@@ -44,7 +44,7 @@ spec:
               port: dvp-api-port
             initialDelaySeconds: 60
             periodSeconds: 15
-            successThreshold: 1 # must be one for liveness & startup
+            successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
             httpGet:

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bd-prd-temp-api-service
+  namespace: bd-prd
+spec:
+  type: ClusterIP
+  selector:
+    app: bd-prd-temp-api
+  ports:
+    - name: prd-api-port # alias listening
+      port: 5000 #  [listening] the container port exposed by a pod or deployment,
+      protocol: TCP
+      targetPort: prd-api-port # [sending] the port on the host machine that traffic is directed to

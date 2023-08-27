@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bd-prd-temp-api
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: bd-prd-temp-api
+  replicas: 2
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: bd-prd-temp-api
+    spec:
+      containers:
+        - name: bd-prd-temp-api
+          image: quay.io/bot_detector/bd-core-files:3dd5120
+          resources:
+            requests:
+              cpu: 1
+            limits:
+              cpu: 2
+          ports:
+            - name: prd-api-port
+              containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: prd-api-port
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: prd-api-port
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            successThreshold: 3
+            timeoutSeconds: 5

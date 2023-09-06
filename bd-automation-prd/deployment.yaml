@@ -111,5 +111,5 @@ spec:
                   name: bd-prd-automation-secret
             - name: BATCH_SIZE
               value: '10000'
-            - name: SERVER_PORT:
+            - name: SERVER_PORT
               value: '3306'

@@ -64,10 +64,7 @@ spec:
                   key: DATABASE
                   name: bd-prd-automation-secret
             - name: SERVER_ADDRESS
-              valueFrom:
-                secretKeyRef:
-                  key: SERVER_ADDRESS
-                  name: bd-prd-automation-secret
+              value: 'mysql.database.svc'
             - name: GRAVEYARD_WEBHOOK
               valueFrom:
                 secretKeyRef:
@@ -114,3 +111,5 @@ spec:
                   name: bd-prd-automation-secret
             - name: BATCH_SIZE
               value: '10000'
+            - name: SERVER_PORT:
+              value: '3306'

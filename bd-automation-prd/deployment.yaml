@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-automation
-          image: quay.io/bot_detector/bd-automation:df066f8
+          image: quay.io/bot_detector/bd-automation:58c822a
           env:
             - name: EMAIL_FROM
               valueFrom:
@@ -64,7 +64,7 @@ spec:
                   key: DATABASE
                   name: bd-prd-automation-secret
             - name: SERVER_ADDRESS
-              value: 'mysql.database.svc'
+              value: mysql.database.svc
             - name: GRAVEYARD_WEBHOOK
               valueFrom:
                 secretKeyRef:

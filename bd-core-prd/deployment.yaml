@@ -43,6 +43,8 @@ spec:
                   key: token
             - name: kafka_url
               value: kafka-service.kafka.svc:9092
+            - name: env
+              value: PRD
           livenessProbe:
             httpGet:
               path: /

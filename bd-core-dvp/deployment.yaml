@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:e097970
+          image: quay.io/bot_detector/bd-core-files:6c7a6db
           resources:
             requests:
-              cpu: "500m"
+              cpu: 500m
               memory: 500M
             limits:
-              cpu: "1000m"
+              cpu: 1000m
               memory: 1000M
           ports:
             - name: dvp-api-port

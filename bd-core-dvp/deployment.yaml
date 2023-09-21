@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-dvp-api
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -17,6 +17,13 @@ spec:
       containers:
         - name: bd-dvp-api
           image: quay.io/bot_detector/bd-core-files:e097970
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 500M
+            limits:
+              cpu: "1000m"
+              memory: 1000M
           ports:
             - name: dvp-api-port
               containerPort: 5000

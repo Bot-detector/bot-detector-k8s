@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-dvp-api
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -22,8 +22,8 @@ spec:
               cpu: 500m
               memory: 500M
             limits:
-              cpu: 1000m
-              memory: 1000M
+              cpu: 2000m
+              memory: 5000M
           ports:
             - name: dvp-api-port
               containerPort: 5000

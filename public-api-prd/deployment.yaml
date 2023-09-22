@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: public-api
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: public-api
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: public-api
+    spec:
+      containers:
+        - name: public-api
+          image: quay.io/bot_detector/bd-public-api
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500M
+            limits:
+              cpu: 2000m
+              memory: 5000M
+          ports:
+            - name: public-api-port
+              containerPort: 5000
+          env:
+            - name: KAFKA_HOST
+              value: kafka-service.kafka.svc:9092
+            - name: env
+              value: PRD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-api-secret
+                  key: sql_uri
+          livenessProbe:
+            httpGet:
+              path: /
+              port: public-api-port
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: public-api-port
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            successThreshold: 3
+            timeoutSeconds: 5

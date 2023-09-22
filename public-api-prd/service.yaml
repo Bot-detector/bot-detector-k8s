@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-api-svc
+  namespace: bd-prd
+spec:
+  selector:
+    app: public-api
+  ports:
+    - name: public-api-port
+      port: 5000
+      protocol: TCP
+      targetPort: public-api-port

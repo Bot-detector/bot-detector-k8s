@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-automation
-          image: quay.io/bot_detector/bd-automation:84b950e
+          image: quay.io/bot_detector/bd-automation:3e9bf9f
           resources:
             requests:
               cpu: 250m

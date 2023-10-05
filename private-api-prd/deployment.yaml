@@ -40,7 +40,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: private-api-port
+              port: priv-api-port
             initialDelaySeconds: 60
             periodSeconds: 15
             successThreshold: 1
@@ -48,7 +48,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: private-api-port
+              port: priv-api-port
             initialDelaySeconds: 60
             periodSeconds: 15
             successThreshold: 3

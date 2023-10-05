@@ -7,7 +7,7 @@ spec:
   selector:
     app: private-api
   ports:
-    - name: private-api-port
+    - name: priv-api-port
       port: 5000
       protocol: TCP
-      targetPort: private-api-port
+      targetPort: priv-api-port

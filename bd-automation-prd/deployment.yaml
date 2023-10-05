@@ -110,7 +110,7 @@ spec:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
             - name: ENDPOINT
-              value: http://bd-dvp-api-service.bd-dvp.svc:5000
+              value: http://private-api-svc.bd-prd.svc:5000
             - name: API_TOKEN
               valueFrom:
                 secretKeyRef:

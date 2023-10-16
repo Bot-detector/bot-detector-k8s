@@ -32,6 +32,10 @@ spec:
               value: kafka-service.kafka.svc:9092
             - name: env
               value: PRD
+            - name: POOL_RECYCLE
+              value: 60
+            - name: POOL_TIMEOUT
+              value: 30
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

@@ -18,6 +18,13 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
+          - path: /v2 # this supports migration to /v2 api endpoints
+            pathType: Prefix
+            backend:
+              service:
+                name: public-api-svc
+                port:
+                  number: public-api-port
           - path: /
             pathType: Prefix
             backend:

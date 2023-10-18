@@ -15,7 +15,7 @@ spec:
       - api-v2.prd.osrsbotdetector.com # this is mainly for the purposes such that the /docs are available
       secretName: api-tls
   rules:
-    - host: api-v2.dev.osrsbotdetector.com
+    - host: api-v2.prd.osrsbotdetector.com
       http:
         paths:
           - path: /

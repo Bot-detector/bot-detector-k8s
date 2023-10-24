@@ -24,7 +24,7 @@ spec:
               service:
                 name: public-api-svc
                 port:
-                  number: public-api-port
+                  name: public-api-port
           - path: /
             pathType: Prefix
             backend:

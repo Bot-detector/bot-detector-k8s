@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pub-api-ingress
-  namespace: bd-dvp
+  namespace: bd-prd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M

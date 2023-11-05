@@ -40,3 +40,8 @@ spec:
               value: '10000'
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
+            - name: PROXY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PROXY_API_KEY
+                  name: bd-prd-scraper-secret

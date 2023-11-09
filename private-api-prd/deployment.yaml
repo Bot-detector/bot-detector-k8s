@@ -33,9 +33,9 @@ spec:
             - name: env
               value: PRD
             - name: POOL_RECYCLE
-              value: '60'
+              value: '50'
             - name: POOL_TIMEOUT
-              value: '30'
+              value: '25'
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

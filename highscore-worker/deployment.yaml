@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:eb2586a
+          image: quay.io/bot_detector/highscore-worker:c710a7c
           resources:
             requests:
               cpu: 500m
@@ -27,9 +27,9 @@ spec:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
             - name: POOL_TIMEOUT
-              value: "25"
+              value: '25'
             - name: POOL_RECYCLE
-              value: "25"
+              value: '25'
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

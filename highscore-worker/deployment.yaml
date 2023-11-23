@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:c710a7c
+          image: quay.io/bot_detector/highscore-worker:d7e1884
           resources:
             requests:
               cpu: 500m
@@ -31,7 +31,7 @@ spec:
             - name: POOL_RECYCLE
               value: '25'
             - name: ENV
-              value: 'PRD'
+              value: PRD
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

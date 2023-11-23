@@ -30,6 +30,8 @@ spec:
               value: '25'
             - name: POOL_RECYCLE
               value: '25'
+            - name: ENv
+              value: 'PRD'
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

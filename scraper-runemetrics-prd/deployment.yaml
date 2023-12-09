@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper-runemetrics
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: scraper-runemetrics
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: scraper-runemetrics
+    spec:
+      containers:
+        - name: scraper-runemetrics
+          image: quay.io/bot_detector/scraper-runemetrics:e73ddab
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500Mi
+            limits:
+              cpu: 1
+          env:
+            - name: PROXY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PROXY_API_KEY
+                  name: bd-prd-scraper-secret
+            - name: KAFKA_HOST
+              value: kafka-service.kafka.svc:9092
+            - name: SESSION_TIMEOUT
+              value: '60'

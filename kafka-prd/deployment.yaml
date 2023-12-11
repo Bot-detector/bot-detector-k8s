@@ -19,7 +19,7 @@ spec:
           image: alpine:3.19.0
           securityContext:
             runAsUser: 0
-          command: 
+          command:
             - chown
           args:
             - 1001:0
@@ -74,3 +74,5 @@ spec:
         - name: kafka-data-volume
           persistentVolumeClaim:
             claimName: kafka-data
+  strategy:
+    type: Recreate

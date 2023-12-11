@@ -20,6 +20,13 @@ spec:
           # securityContext:
           #   runAsUser: 0  # Set to 0 for root user
           #   runAsGroup: 0 # Set to 0 for root group
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 200m
+            limits:
+              memory: 4Gi
+              cpu: "4"
           env:
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"
@@ -40,7 +47,6 @@ spec:
             #   value: 0@kafka:9093
             # - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
             #   value: CONTROLLER
-  
           ports:
             - containerPort: 9092
               name: kafka
@@ -48,10 +54,10 @@ spec:
               name: kafka-ctrl
             - containerPort: 9094
               name: kafka-external
-      #     volumeMounts:
-      #       - name: kafka-data-volume
-      #         mountPath: /bitnami/kafka/data
-      # volumes:
-      #   - name: kafka-data-volume
-      #     persistentVolumeClaim:
-      #       claimName: kafka-data
+          volumeMounts:
+            - name: kafka-data-volume
+              mountPath: /bitnami/kafka
+      volumes:
+        - name: kafka-data-volume
+          persistentVolumeClaim:
+            claimName: kafka-data

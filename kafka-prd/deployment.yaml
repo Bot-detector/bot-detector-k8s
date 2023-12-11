@@ -14,6 +14,20 @@ spec:
       labels:
         app: bd-prd-kafka
     spec:
+      initContainers:
+        - name: init-chown
+          image: alpine:3.19.0
+          securityContext:
+            runAsUser: 0
+          command: 
+            - chown
+          args:
+            - -R
+            - 1001:1001
+            - /bitnami/kafka
+          volumeMounts:
+            - name: kafka-data-volume
+              mountPath: /bitnami/kafka
       containers:
         - name: kafka
           image: bitnami/kafka:3.5.1-debian-11-r3

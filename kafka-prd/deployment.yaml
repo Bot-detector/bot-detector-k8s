@@ -22,8 +22,7 @@ spec:
           command: 
             - chown
           args:
-            - -R
-            - 1001:1001
+            - 1001:0
             - /bitnami/kafka
           volumeMounts:
             - name: kafka-data-volume

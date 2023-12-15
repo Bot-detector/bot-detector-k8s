@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: scraper-runemetrics
-  replicas: 2
+  replicas: 4
   revisionHistoryLimit: 1
   template:
     metadata:

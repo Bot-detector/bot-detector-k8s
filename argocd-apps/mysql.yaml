@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+  namespace: argo-cd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
+      targetRevision: master
+      ref: bot-detector-k8s
+    # mysql
+    - repoURL: https://github.com/argoproj/argocd-example-apps.git
+      targetRevision: HEAD
+      path: database/mysql/mysql
+    # some encrypted mysql dependencies
+    - chart: passthrough
+      repoURL: https://github.com/Bot-detector/helm-charts.git
+      targetRevision: 1.0.0
+      helm:
+        valueFiles:
+          - secrets://supplement/configmap.sops.yaml
+          - secrets://supplement/secret.sops.yaml
+      from:
+        - sourcePath: $bot-detector-k8s/database/mysql/mysql/supplement
+          destinationPath: supplement
+          failOnOutOfBoundsSymlink: true
+    # mysql exporter
+    - chart: prometheus-mysql-exporter
+      repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: 2.1.0
+      helm:
+        releaseName: mysql-exporter
+        valueFiles:
+          - mysql-exporter/bot-detector-k8s.yaml
+          - secrets://mysql-exporter/bot-detector-k8s.sops.yaml
+      from:
+        - sourcePath: $bot-detector-k8s/database/mysql/monitoring/mysql-exporter
+          destinationPath: mysql-exporter
+          failOnOutOfBoundsSymlink: true
+    # sql exporter
+    - chart: sql-exporter
+      repoURL: https://burningalchemist.github.io/sql_exporter
+      targetRevision: 0.2.4
+      helm:
+        valueFiles:
+          - sql-exporter/values.yaml
+      from:
+        - sourcePath: $bot-detector-k8s/database/mysql/monitoring/sql-exporter
+          destinationPath: sql-exporter
+          failOnOutOfBoundsSymlink: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: database
+  preserveResourcesOnDeletion: false
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

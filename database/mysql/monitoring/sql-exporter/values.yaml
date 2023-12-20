@@ -1,0 +1,5 @@
+# helm repo add sql_exporter https://burningalchemist.github.io/sql_exporter
+# helm repo update
+# helm install sql_exporter sql_exporter/sql-exporter
+
+# https://github.com/burningalchemist/sql_exporter/blob/master/helm/values.yaml

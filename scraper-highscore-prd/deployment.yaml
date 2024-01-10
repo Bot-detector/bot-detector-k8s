@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: scraper-highscore
-  replicas: 2
+  replicas: 0 
   revisionHistoryLimit: 1
   template:
     metadata:

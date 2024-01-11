@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: scraper-highscore
-          image: quay.io/bot_detector/scraper-highscore:e122aac
+          image: quay.io/bot_detector/scraper-highscore:94a277f
           resources:
             requests:
               cpu: 500m

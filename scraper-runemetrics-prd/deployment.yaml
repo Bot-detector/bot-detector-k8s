@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: scraper-runemetrics
-          image: quay.io/bot_detector/scraper-runemetrics:e122aac
+          image: quay.io/bot_detector/scraper-runemetrics:94a277f
           resources:
             requests:
               cpu: 500m

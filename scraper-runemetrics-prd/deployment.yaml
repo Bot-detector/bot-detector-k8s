@@ -17,6 +17,7 @@ spec:
       containers:
         - name: scraper-runemetrics
           image: quay.io/bot_detector/scraper-runemetrics:1feedd3
+          command: ["sleep", "infinity"]
           resources:
             requests:
               cpu: 500m

@@ -17,6 +17,7 @@ spec:
       containers:
         - name: scraper-highscore
           image: quay.io/bot_detector/scraper-highscore:1feedd3
+          command: ["sleep", "infinity"]
           resources:
             requests:
               cpu: 500m

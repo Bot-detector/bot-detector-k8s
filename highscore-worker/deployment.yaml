@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:18bfaea
+          image: quay.io/bot_detector/highscore-worker:b325734
           # command: ["sleep", "infinity"]
           resources:
             requests:

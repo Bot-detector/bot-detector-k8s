@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: report-worker
-          image: quay.io/bot_detector/report-worker:b325734
-          # command: ["sleep", "infinity"]
+          image: quay.io/bot_detector/report-worker:9e9d5af
           resources:
             requests:
               cpu: 500m

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-dvp-web
-          image: quay.io/bot_detector/bd-web:02ce95f
+          image: quay.io/bot_detector/bd-web:1829336
           ports:
             - name: dvp-web-port
               containerPort: 8000

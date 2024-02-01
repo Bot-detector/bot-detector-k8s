@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-prd-api
-          image: quay.io/bot_detector/bd-core-files:d8b830b
+          image: quay.io/bot_detector/bd-core-files:9fa83e5
           resources:
             requests:
               cpu: 1

@@ -25,3 +25,10 @@ spec:
                 name: bd-dvp-api-service
                 port:
                   name: dvp-api-port
+          - path: /v2
+            pathType: Prefix
+            backend:
+              service:
+                name: public-api-svc
+                port:
+                  name: public-api-port

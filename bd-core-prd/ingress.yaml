@@ -18,13 +18,6 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
           - path: /v2
             pathType: Prefix
             backend:
@@ -32,3 +25,10 @@ spec:
                 name: public-api-svc
                 port:
                   name: public-api-port
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port

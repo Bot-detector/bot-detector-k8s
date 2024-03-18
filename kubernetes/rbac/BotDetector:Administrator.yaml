@@ -1,7 +1,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: BotDetector-Administrator
+  name: BotDetector:Administrator
 subjects:
   - kind: Group
     name: Bot-detector:Administrator

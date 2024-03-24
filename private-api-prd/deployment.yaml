@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: private-api
-          image: quay.io/bot_detector/private-api:e08f3ea
+          image: quay.io/bot_detector/private-api:4d70b82
           resources:
             requests:
               cpu: 500m

@@ -16,17 +16,19 @@ spec:
     spec:
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:84155fe
+          image: quay.io/bot_detector/bd-ml:a346a2e
           env:
             - name: token
               valueFrom:
                 secretKeyRef:
                   key: token
                   name: bd-prd-ml-secret
-            - name: api
-              value: http://bd-dvp-api-service.bd-dvp.svc:5000
             - name: secret_token
               valueFrom:
                 secretKeyRef:
                   key: secret_token
                   name: bd-prd-ml-secret
+            - name: private_api
+              value: http://private-api-svc.bd-prd.svc:5000
+            - name: detector_api
+              value: http://bd-dvp-api-service.bd-dvp.svc:5000

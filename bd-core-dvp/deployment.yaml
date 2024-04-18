@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:4f82016
+          image: quay.io/bot_detector/bd-core-files:84b0620
           resources:
             requests:
               cpu: 500m

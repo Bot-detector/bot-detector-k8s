@@ -9,6 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
     nginx.ingress.kubernetes.io/global-rate-limit: '100'
     nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
 spec:
   ingressClassName: nginx
   tls:

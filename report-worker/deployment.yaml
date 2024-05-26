@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: report-worker
-          image: quay.io/bot_detector/report-worker:b1a00ad
+          image: quay.io/bot_detector/report-worker:88ce226
           resources:
             requests:
               cpu: 500m

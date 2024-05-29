@@ -4,6 +4,11 @@ metadata:
   name: bd-prd-api
   namespace: bd-prd
 spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: bd-prd-api
@@ -48,9 +53,8 @@ spec:
             httpGet:
               path: /
               port: prd-api-port
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
             periodSeconds: 15
-            successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
@@ -60,3 +64,10 @@ spec:
             periodSeconds: 15
             successThreshold: 3
             timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /
+              port: prd-api-port
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6

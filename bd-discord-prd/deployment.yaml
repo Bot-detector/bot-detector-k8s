@@ -17,6 +17,10 @@ spec:
       containers:
         - name: bd-prd-discord
           image: quay.io/bot_detector/bd-discord-bot:d101845
+          resources:
+            requests:
+              cpu: 500m
+              memory: 200Mi
           ports:
             - containerPort: 3000
           env:

@@ -19,9 +19,8 @@ spec:
           image: quay.io/bot_detector/bd-core-files:12170a7
           resources:
             requests:
-              cpu: 1
-            limits:
-              cpu: 2
+              cpu: 500m
+              memory: 200M
           ports:
             - name: prd-api-port
               containerPort: 5000

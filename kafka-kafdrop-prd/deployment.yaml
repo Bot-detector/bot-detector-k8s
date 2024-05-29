@@ -17,6 +17,10 @@ spec:
       containers:
         - name: kafdrop
           image: obsidiandynamics/kafdrop:latest
+          resources:
+            requests:
+              memory: 600Mi
+              cpu: 200m
           env:
             - name: KAFKA_BROKERCONNECT
               value: kafka-service.kafka.svc:9092 # bd-prd-api-service.bd-prd.svc:5000

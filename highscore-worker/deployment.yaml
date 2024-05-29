@@ -19,8 +19,8 @@ spec:
           image: quay.io/bot_detector/highscore-worker:381120e
           resources:
             requests:
-              cpu: 500m
-              memory: 500Mi
+              cpu: 100m
+              memory: 100Mi
             limits:
               cpu: 1
           env:

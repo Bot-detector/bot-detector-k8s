@@ -35,11 +35,10 @@ spec:
           #   runAsGroup: 0 # Set to 0 for root group
           resources:
             requests:
-              memory: 2Gi
+              memory: 1.5Gi
               cpu: 200m
             limits:
-              memory: 4Gi
-              cpu: "4"
+              memory: 2Gi
           env:
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"

@@ -20,9 +20,7 @@ spec:
           resources:
             requests:
               cpu: 500m
-              memory: 500Mi
-            limits:
-              cpu: 1
+              memory: 100Mi
           env:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092

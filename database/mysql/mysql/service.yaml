@@ -9,12 +9,16 @@ metadata:
     app.kubernetes.io/name: mysql
 spec:
   type: ClusterIP
-  ports:
-    - name: mysql
-      port: 3306
-      protocol: TCP
-      targetPort: mysql
   selector:
     app.kubernetes.io/component: database
     app.kubernetes.io/instance: mysql
     app.kubernetes.io/name: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql
+      protocol: TCP
+    - name: metrics
+      port: 9104
+      targetPort: metrics
+      protocol: TCP

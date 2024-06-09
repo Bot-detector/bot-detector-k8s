@@ -57,6 +57,10 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            runAsNonRoot: true
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
@@ -66,10 +70,42 @@ spec:
               readOnly: true
             - name: mysql-files
               mountPath: /var/lib/mysql-files
-      securityContext:
-        runAsGroup: 999
-        runAsNonRoot: true
-        runAsUser: 999
+        - name: mysql-exporter
+          image: prom/mysqld-exporter:v0.15.1
+          args:
+            - --config.my-cnf=/etc/mysql/my.cnf
+            - --mysqld.username=exporter
+          resources:
+            requests:
+              cpu: 100m
+              memory: 32Mi
+            limits:
+              cpu: 2000m
+              memory: 128Mi
+          env:
+            - name: MYSQLD_EXPORTER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_EXPORTER_PASSWORD
+                  name: mysql
+                  optional: false
+          ports:
+            - name: metrics
+              containerPort: 9104
+              protocol: TCP
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: mysql-conf
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
+              readOnly: true
       terminationGracePeriodSeconds: 300
       volumes:
         - name: mysql-data

@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: report-worker
-  replicas: 2
+  replicas: 4
   revisionHistoryLimit: 1
   template:
     metadata:

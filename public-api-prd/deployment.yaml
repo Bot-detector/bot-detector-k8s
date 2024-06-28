@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: public-api
-          image: quay.io/bot_detector/public-api:b84d128
+          image: quay.io/bot_detector/public-api:6439d1b
           resources:
             requests:
               cpu: 500m

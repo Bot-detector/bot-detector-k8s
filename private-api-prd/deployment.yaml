@@ -14,7 +14,16 @@ spec:
       labels:
         app: private-api
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: private-api
           image: quay.io/bot_detector/private-api:d5d3dd4
           resources:

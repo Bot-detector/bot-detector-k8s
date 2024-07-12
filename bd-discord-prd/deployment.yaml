@@ -14,7 +14,16 @@ spec:
       labels:
         app: bd-prd-discord
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: bd-prd-discord
           image: quay.io/bot_detector/bd-discord-bot:d101845
           resources:

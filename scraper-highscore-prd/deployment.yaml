@@ -14,7 +14,16 @@ spec:
       labels:
         app: scraper-highscore
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: scraper-highscore
           image: quay.io/bot_detector/scraper-highscore:5b19cb1
           resources:

@@ -14,7 +14,16 @@ spec:
       labels:
         app: bd-prd-temp-api
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: bd-prd-temp-api
           image: quay.io/bot_detector/bd-temp-api:47f2c7c
           resources:

@@ -14,7 +14,16 @@ spec:
       labels:
         app: report-worker
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: report-worker
           image: quay.io/bot_detector/report-worker:ec32915
           resources:

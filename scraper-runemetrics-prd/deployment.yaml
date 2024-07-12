@@ -14,7 +14,16 @@ spec:
       labels:
         app: scraper-runemetrics
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: scraper-runemetrics
           image: quay.io/bot_detector/scraper-runemetrics:5b19cb1
           resources:

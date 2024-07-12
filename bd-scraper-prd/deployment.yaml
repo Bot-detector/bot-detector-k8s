@@ -14,7 +14,16 @@ spec:
       labels:
         app: bd-prd-scraper
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: bd-prd-scraper
           image: quay.io/bot_detector/bd-scraper:e73ddab
           resources:

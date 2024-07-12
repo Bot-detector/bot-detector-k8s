@@ -19,7 +19,16 @@ spec:
       labels:
         app: bd-prd-api
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: bd-prd-api
           image: quay.io/bot_detector/bd-core-files:12170a7
           resources:

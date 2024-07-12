@@ -14,7 +14,16 @@ spec:
       labels:
         app: bd-dvp-web
     spec:
-      containers:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - mysql
+            topologyKey: "kubernetes.io/hostname"
         - name: bd-dvp-web
           image: quay.io/bot_detector/bd-web:a211afa
           ports:

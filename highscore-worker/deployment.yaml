@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:1eb76c7
+          image: quay.io/bot_detector/highscore-worker:c6d757b
           resources:
             requests:
               cpu: 100m

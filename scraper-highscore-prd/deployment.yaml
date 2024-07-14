@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: scraper-highscore
+      containers:
+        - name:  scraper-highscore
           image: quay.io/bot_detector/scraper-highscore:5b19cb1
           resources:
             requests:

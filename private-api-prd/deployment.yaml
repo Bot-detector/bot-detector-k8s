@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: private-api
+      containers:
+        - name:  private-api
           image: quay.io/bot_detector/private-api:d5d3dd4
           resources:
             requests:

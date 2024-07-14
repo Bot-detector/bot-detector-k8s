@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: bd-prd-discord
+      containers:
+        - name:  bd-prd-discord
           image: quay.io/bot_detector/bd-discord-bot:d101845
           resources:
             requests:

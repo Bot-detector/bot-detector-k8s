@@ -24,6 +24,7 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
+      containers:
         - name: bd-prd-temp-api
           image: quay.io/bot_detector/bd-temp-api:47f2c7c
           resources:

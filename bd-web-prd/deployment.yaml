@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: bd-prd-web
+      containers:
+        - name:  bd-prd-web
           image: quay.io/bot_detector/bd-web:89ad226
           ports:
             - name: prd-web-port

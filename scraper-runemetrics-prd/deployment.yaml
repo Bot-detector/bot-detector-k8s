@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: scraper-runemetrics
+      containers:
+        - name:  scraper-runemetrics
           image: quay.io/bot_detector/scraper-runemetrics:5b19cb1
           resources:
             requests:

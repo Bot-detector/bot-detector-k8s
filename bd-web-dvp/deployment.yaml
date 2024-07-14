@@ -24,7 +24,8 @@ spec:
                     values:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
-        - name: bd-dvp-web
+      containers:
+        - name:  bd-dvp-web
           image: quay.io/bot_detector/bd-web:a211afa
           ports:
             - name: dvp-web-port

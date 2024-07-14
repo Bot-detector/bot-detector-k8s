@@ -19,6 +19,18 @@ spec:
       labels:
         app: public-api
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: public-api
           image: quay.io/bot_detector/public-api:ebb949a

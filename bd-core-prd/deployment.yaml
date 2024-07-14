@@ -30,7 +30,7 @@ spec:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
       containers:
-        - name:  bd-prd-api
+        - name: bd-prd-api
           image: quay.io/bot_detector/bd-core-files:12170a7
           resources:
             requests:

@@ -30,7 +30,7 @@ spec:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
       containers:
-        - name:  public-api
+        - name: public-api
           image: quay.io/bot_detector/public-api:8906f26
           resources:
             requests:

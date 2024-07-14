@@ -25,7 +25,7 @@ spec:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
       containers:
-        - name:  report-worker
+        - name: report-worker
           image: quay.io/bot_detector/report-worker:ec32915
           resources:
             requests:

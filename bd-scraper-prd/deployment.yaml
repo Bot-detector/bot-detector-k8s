@@ -25,7 +25,7 @@ spec:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
       containers:
-        - name:  bd-prd-scraper
+        - name: bd-prd-scraper
           image: quay.io/bot_detector/bd-scraper:e73ddab
           resources:
             requests:

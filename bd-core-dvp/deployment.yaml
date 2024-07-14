@@ -25,7 +25,7 @@ spec:
                       - mysql
             topologyKey: "kubernetes.io/hostname"
       containers:
-        - name:  bd-dvp-api
+        - name: bd-dvp-api
           image: quay.io/bot_detector/bd-core-files:f6b0ea6
           resources:
             requests:

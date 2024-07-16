@@ -25,10 +25,10 @@ spec:
                       operator: In
                       values:
                         - mysql
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:d101845
+          image: quay.io/bot_detector/bd-discord-bot:55946f6
           resources:
             requests:
               cpu: 500m

@@ -25,10 +25,10 @@ spec:
                       operator: In
                       values:
                         - mysql
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:f6b0ea6
+          image: quay.io/bot_detector/bd-core-files:1d40578
           resources:
             requests:
               cpu: 500m

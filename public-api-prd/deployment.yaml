@@ -30,10 +30,10 @@ spec:
                       operator: In
                       values:
                         - mysql
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: public-api
-          image: quay.io/bot_detector/public-api:ebb949a
+          image: quay.io/bot_detector/public-api:c0be912
           resources:
             requests:
               cpu: 500m

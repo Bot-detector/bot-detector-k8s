@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kafdrop
-          image: obsidiandynamics/kafdrop:latest
+          image: obsidiandynamics/kafdrop:4.0.2
           resources:
             requests:
               memory: 600Mi

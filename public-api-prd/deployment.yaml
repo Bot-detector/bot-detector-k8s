@@ -33,7 +33,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: public-api
-          image: quay.io/bot_detector/public-api:f05922c
+          image: quay.io/bot_detector/public-api:191f85a
           resources:
             requests:
               cpu: 500m

@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-api
-  replicas: 2
+  replicas: 4
   revisionHistoryLimit: 1
   template:
     metadata:

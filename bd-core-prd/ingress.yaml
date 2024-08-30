@@ -5,9 +5,11 @@ metadata:
   namespace: bd-prd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/proxy-body-size: 1M
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
     nginx.ingress.kubernetes.io/global-rate-limit: '100'
     nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
 spec:
   ingressClassName: nginx
   tls:
@@ -18,6 +20,20 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
+          - path: /v1/report/count
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
+          - path: /v2
+            pathType: Prefix
+            backend:
+              service:
+                name: public-api-svc
+                port:
+                  name: public-api-port
           - path: /
             pathType: Prefix
             backend:

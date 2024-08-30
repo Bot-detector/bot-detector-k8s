@@ -4,26 +4,40 @@ metadata:
   name: public-api
   namespace: bd-prd
 spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: public-api
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 1
   template:
     metadata:
       labels:
         app: public-api
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: public-api
-          image: quay.io/bot_detector/public-api:bd99cd8
+          image: quay.io/bot_detector/public-api:191f85a
           resources:
             requests:
               cpu: 500m
-              memory: 500M
-            limits:
-              cpu: 2000m
-              memory: 5000M
+              memory: 150M
           ports:
             - name: public-api-port
               containerPort: 5000
@@ -45,9 +59,8 @@ spec:
             httpGet:
               path: /
               port: public-api-port
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
             periodSeconds: 15
-            successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
@@ -57,3 +70,10 @@ spec:
             periodSeconds: 15
             successThreshold: 3
             timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /
+              port: public-api-port
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6

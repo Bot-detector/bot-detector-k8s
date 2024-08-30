@@ -14,19 +14,33 @@ spec:
       labels:
         app: bd-prd-ml
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:6749ee1
+          image: quay.io/bot_detector/bd-ml:b32d61b
           env:
             - name: token
               valueFrom:
                 secretKeyRef:
                   key: token
                   name: bd-prd-ml-secret
-            - name: api
-              value: http://bd-dvp-api-service.bd-dvp.svc:5000
             - name: secret_token
               valueFrom:
                 secretKeyRef:
                   key: secret_token
                   name: bd-prd-ml-secret
+            - name: private_api
+              value: http://private-api-svc.bd-prd.svc:5000
+            - name: detector_api
+              value: http://bd-dvp-api-service.bd-dvp.svc:5000

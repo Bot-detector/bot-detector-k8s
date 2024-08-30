@@ -14,9 +14,25 @@ spec:
       labels:
         app: bd-prd-discord
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:446b99a
+          image: quay.io/bot_detector/bd-discord-bot:47d598f
+          resources:
+            requests:
+              cpu: 500m
+              memory: 200Mi
           ports:
             - containerPort: 3000
           env:

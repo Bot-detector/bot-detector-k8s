@@ -1,0 +1,124 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/component: database
+    app.kubernetes.io/instance: mysql
+    app.kubernetes.io/name: mysql
+  name: mysql
+  namespace: database
+spec:
+  replicas: 0
+  revisionHistoryLimit: 0
+  serviceName: mysql
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: mysql
+      app.kubernetes.io/name: mysql
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: database
+        app.kubernetes.io/instance: mysql
+        app.kubernetes.io/name: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0.32-debian
+          resources:
+            requests:
+              cpu: "6"
+              memory: 16Gi
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_ROOT_PASSWORD
+                  name: mysql
+                  optional: false
+            - name: USER
+              value: root
+            - name: MYSQL_UNIX_PORT
+              value: /tmp/mysqld.sock
+            - name: MYSQLX_UNIX_PORT
+              value: /tmp/mysqld2.sock
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - /usr/bin/mysqladmin
+                - --silent
+                - ping
+            failureThreshold: 3
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            runAsNonRoot: true
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: mysql-conf
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
+              readOnly: true
+            - name: mysql-files
+              mountPath: /var/lib/mysql-files
+        - name: mysql-exporter
+          image: prom/mysqld-exporter:v0.15.1
+          args:
+            - --config.my-cnf=/etc/mysql/my.cnf
+            - --mysqld.username=exporter
+          resources:
+            requests:
+              cpu: 100m
+              memory: 32Mi
+            limits:
+              cpu: 2000m
+              memory: 128Mi
+          env:
+            - name: MYSQLD_EXPORTER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_EXPORTER_PASSWORD
+                  name: mysql
+                  optional: false
+          ports:
+            - name: metrics
+              containerPort: 9104
+              protocol: TCP
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: mysql-conf
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
+              readOnly: true
+      terminationGracePeriodSeconds: 300
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data
+        - name: mysql-conf
+          configMap:
+            defaultMode: 420
+            name: mysql-conf
+        - name: mysql-files
+          emptyDir:
+            sizeLimit: 2Gi
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%

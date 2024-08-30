@@ -14,13 +14,25 @@ spec:
       labels:
         app: scraper-highscore
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: scraper-highscore
-          image: quay.io/bot_detector/scraper-highscore:2154d0c
+          image: quay.io/bot_detector/scraper-highscore:5b19cb1
           resources:
             requests:
               cpu: 500m
-              memory: 500Mi
+              memory: 150Mi
             limits:
               cpu: 1
           env:

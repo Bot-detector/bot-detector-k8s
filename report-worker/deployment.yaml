@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: highscore-worker
+  name: report-worker
   namespace: bd-prd
 spec:
   selector:
     matchLabels:
-      app: highscore-worker
-  replicas: 2
+      app: report-worker
+  replicas: 4
   revisionHistoryLimit: 1
   template:
     metadata:
       labels:
-        app: highscore-worker
+        app: report-worker
     spec:
       affinity:
         podAntiAffinity:
@@ -27,14 +27,12 @@ spec:
                         - mysql
                 topologyKey: kubernetes.io/hostname
       containers:
-        - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:59ceec0
+        - name: report-worker
+          image: quay.io/bot_detector/report-worker:50102c4
           resources:
             requests:
-              cpu: 100m
+              cpu: 500m
               memory: 100Mi
-            limits:
-              cpu: 1
           env:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
@@ -47,5 +45,5 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: highscore-worker
+                  name: report-worker
                   key: DATABASE_URL

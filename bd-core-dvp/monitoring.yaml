@@ -8,4 +8,5 @@ spec:
     - path: /metrics
       port: metrics
   selector:
-    app: bd-dvp-api
+    matchLabels:
+      app: bd-dvp-api

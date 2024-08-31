@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: core-api
+  namespace: bd-dvp
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+  selector:
+    app: bd-dvp-api

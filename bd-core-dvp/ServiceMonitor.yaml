@@ -6,7 +6,7 @@ metadata:
 spec:
   endpoints:
     - path: /metrics
-      port: metrics
+      port: dvp-web-port
   selector:
     matchLabels:
       app: bd-dvp-api

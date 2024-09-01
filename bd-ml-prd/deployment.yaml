@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:d02e164
+          image: quay.io/bot_detector/bd-ml:a003c7d
           env:
             - name: token
               valueFrom:

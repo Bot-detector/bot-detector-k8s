@@ -25,10 +25,10 @@ spec:
                       operator: In
                       values:
                         - mysql
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:b32d61b
+          image: quay.io/bot_detector/bd-ml:d971a08
           env:
             - name: token
               valueFrom:

@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
     path: database/mysql
+    plugin:
+      name: sopsdecrypt
   destination:
     server: https://kubernetes.default.svc
     namespace: database

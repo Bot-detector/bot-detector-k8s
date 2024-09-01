@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dvp-api
-          image: quay.io/bot_detector/bd-core-files:1c0872e
+          image: quay.io/bot_detector/bd-core-files:578f527
           resources:
             requests:
               cpu: 500m

@@ -29,7 +29,7 @@ spec:
       containers:
         - name: bd-prd-ml
           image: quay.io/bot_detector/bd-ml:a003c7d
-          command: ["sleep", "infinity"]
+          # command: ["sleep", "infinity"]
           env:
             - name: token
               valueFrom:

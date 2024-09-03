@@ -28,8 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:a003c7d
-          # command: ["sleep", "infinity"]
+          image: quay.io/bot_detector/bd-ml:b11b11b
           env:
             - name: token
               valueFrom:

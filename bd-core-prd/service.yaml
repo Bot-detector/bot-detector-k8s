@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: bd-prd-api-service
   namespace: bd-prd
+  labels:
+    app: bd-prd-api
 spec:
   type: ClusterIP
   selector:

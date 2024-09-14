@@ -9,4 +9,4 @@ spec:
       port: prd-api-port
   selector:
     matchLabels:
-      app: prd-api-port
+      app: bd-prd-api

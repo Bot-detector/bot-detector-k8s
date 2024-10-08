@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
+    targetRevision: HEAD
+    path: database/mysql
+    plugin:
+      name: sopsdecrypt
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: database
+  preserveResourcesOnDeletion: false
+  syncPolicy:
+    #automated:
+    #  selfHeal: true
+    #  prune: true
+    syncOptions:
+      - CreateNamespace=true

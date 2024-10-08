@@ -126,5 +126,5 @@ spec:
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
       maxUnavailable: 100%
+      partition: 0

@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: report-worker
-          image: quay.io/bot_detector/report-worker:2f9be14
+          image: quay.io/bot_detector/report-worker:4b66248
           resources:
             requests:
               cpu: 500m

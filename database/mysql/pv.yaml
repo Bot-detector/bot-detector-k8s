@@ -13,8 +13,8 @@ spec:
   storageClassName: zfs
   accessModes:
     - ReadWriteOnce
-# capacity:
-#   storage: 1Ti
+  capacity:
+    storage: 1Ti
   csi:
     driver: zfs.csi.openebs.io
     fsType: zfs

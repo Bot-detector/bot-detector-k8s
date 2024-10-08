@@ -10,3 +10,5 @@ spec:
   resources:
     requests:
       storage: 1Ti
+  volumeMode: Filesystem
+  volumeName: mysql-data

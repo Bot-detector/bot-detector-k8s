@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-dvp-web
-          image: quay.io/bot_detector/bd-web:6290972
+          image: quay.io/bot_detector/bd-web:77acbcd
           ports:
             - name: dvp-web-port
               containerPort: 8000

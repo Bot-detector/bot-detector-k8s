@@ -25,10 +25,10 @@ spec:
                       operator: In
                       values:
                         - mysql
-                topologyKey: "kubernetes.io/hostname"
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-runemetrics
-          image: quay.io/bot_detector/scraper-runemetrics:5b19cb1
+          image: quay.io/bot_detector/scraper-runemetrics:a7245cd
           resources:
             requests:
               cpu: 500m

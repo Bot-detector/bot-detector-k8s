@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scraper-rm-service
+  namespace: bd-prd
+  labels:
+    app: scraper-runemetrics
+spec:
+  type: ClusterIP
+  selector:
+    app: scraper-runemetrics
+  ports:
+    - name: scraper-rm-metrics # alias listening
+      port: 8000 #  [listening] the container port exposed by a pod or deployment,
+      protocol: TCP
+      targetPort: scraper-rm-metrics # [sending] the port on the host machine that traffic is directed to

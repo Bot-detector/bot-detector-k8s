@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scraper-hs-service
+  namespace: bd-prd
+  labels:
+    app: scraper-highscore
+spec:
+  type: ClusterIP
+  selector:
+    app: scraper-highscore
+  ports:
+    - name: scraper-hs-metrics # alias listening
+      port: 8000 #  [listening] the container port exposed by a pod or deployment,
+      protocol: TCP
+      targetPort: scraper-hs-metrics # [sending] the port on the host machine that traffic is directed to

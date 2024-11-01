@@ -1,12 +1,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: scraper-highscore
+  name: scraper-hs
   namespace: bd-prd
 spec:
   endpoints:
     - path: /
-      port: scraper-hs-metrics
+      port: metrics
   selector:
     matchLabels:
       app: scraper-highscore

@@ -36,7 +36,7 @@ spec:
             limits:
               cpu: 1
          ports:
-            - name: scraper-rm-metrics
+            - name: metrics
               containerPort: 8000
           env:
             - name: PROXY_API_KEY

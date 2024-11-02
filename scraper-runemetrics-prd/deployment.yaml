@@ -35,7 +35,7 @@ spec:
               memory: 150Mi
             limits:
               cpu: 1
-         ports:
+          ports:
             - name: metrics
               containerPort: 8000
           env:
@@ -47,4 +47,4 @@ spec:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
             - name: SESSION_TIMEOUT
-              value: '60'
+              value: "60"

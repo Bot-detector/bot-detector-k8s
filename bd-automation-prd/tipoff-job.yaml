@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: bd-prd-automation
+  name: tipoff
   namespace: bd-prd
   labels:
     app.kubernetes.io/name: automation

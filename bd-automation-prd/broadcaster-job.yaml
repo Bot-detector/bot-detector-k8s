@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: bd-prd-automation
+  name: broadcaster
   namespace: bd-prd
   labels:
     app.kubernetes.io/name: automation
-    app.kubernetes.io/instance: tipoff
+    app.kubernetes.io/instance: broadcaster
 spec:
   schedule: "0 20 * * *" # Example: Run daily at 2:00 AM
   concurrencyPolicy: "Forbid" # Prevents new jobs if a previous job is still running

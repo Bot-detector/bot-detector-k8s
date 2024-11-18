@@ -4,7 +4,7 @@ metadata:
   name: bd-prd-automation
   namespace: bd-prd
   labels:
-    app.kubernetes.io/name: broadcaster
+    app.kubernetes.io/name: automation
     app.kubernetes.io/instance: tipoff
 spec:
   schedule: "0 20 * * *" # Example: Run daily at 2:00 AM
@@ -16,7 +16,7 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/name: broadcaster
+            app.kubernetes.io/name: automation
             app.kubernetes.io/instance: broadcaster
         spec:
           affinity:
@@ -26,7 +26,7 @@ spec:
                   podAffinityTerm:
                     labelSelector:
                       matchLabels:
-                        app.kubernetes.io/name: broadcaster
+                        app.kubernetes.io/name: automation
                         app.kubernetes.io/instance: broadcaster
                     topologyKey: kubernetes.io/hostname
           containers:

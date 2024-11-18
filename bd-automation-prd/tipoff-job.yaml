@@ -32,6 +32,8 @@ spec:
           containers:
           - name: bd-prd-automation
             image: quay.io/bot_detector/bd-automation:4480879
+            command: ["python", "src/main.py"]
+            args: ["--run-tipoff"]
             resources:
               requests:
                 cpu: 250m

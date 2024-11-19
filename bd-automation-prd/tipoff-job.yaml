@@ -7,10 +7,10 @@ metadata:
     app.kubernetes.io/name: automation
     app.kubernetes.io/instance: tipoff
 spec:
-  schedule: "0 10 * * *" # Example: Run daily at 10:00
-  concurrencyPolicy: "Forbid" # Prevents new jobs if a previous job is still running
-  successfulJobsHistoryLimit: 0 # Completed jobs are deleted
-  failedJobsHistoryLimit: 3 # Failed jobs are deleted
+  schedule: 0 10 * * *
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
@@ -32,9 +32,12 @@ spec:
                     topologyKey: kubernetes.io/hostname
           containers:
             - name: bd-prd-automation
-              image: quay.io/bot_detector/bd-automation:4480879
-              command: ["python", "src/main.py"]
-              args: ["--run-tipoff"]
+              image: quay.io/bot_detector/bd-automation:65016aa
+              command:
+                - python
+                - src/main.py
+              args:
+                - '--run-tipoff'
               resources:
                 requests:
                   cpu: 250m
@@ -134,6 +137,6 @@ spec:
                       key: API_TOKEN
                       name: bd-prd-automation-secret
                 - name: BATCH_SIZE
-                  value: "10000"
+                  value: '10000'
                 - name: SERVER_PORT
-                  value: "3306"
+                  value: '3306'

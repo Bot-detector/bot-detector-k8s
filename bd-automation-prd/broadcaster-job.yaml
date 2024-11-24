@@ -38,12 +38,12 @@ spec:
                 - src/main.py
               args:
                 - '--run-broadcast'
-              resources:
-                requests:
-                  cpu: 250m
-                  memory: 500M
-                limits:
-                  cpu: 1000m
+              # resources:
+              #   requests:
+              #     cpu: 250m
+              #     memory: 500M
+              #   limits:
+              #     cpu: 1000m
               env:
                 - name: EMAIL_FROM
                   valueFrom:

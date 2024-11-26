@@ -31,8 +31,8 @@ spec:
           image: quay.io/bot_detector/private-api:aa3782b
           resources:
             requests:
-              cpu: 500m
-              memory: 150M
+              cpu: 200m
+              memory: 300M
           ports:
             - name: priv-api-port
               containerPort: 5000

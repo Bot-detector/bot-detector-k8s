@@ -31,7 +31,7 @@ spec:
           image: quay.io/bot_detector/bd-core-files:578f527
           resources:
             requests:
-              cpu: 500m
+              cpu: 50m
               memory: 200M
           ports:
             - name: dvp-api-port

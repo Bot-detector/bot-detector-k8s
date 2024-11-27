@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-runemetrics
-          image: quay.io/bot_detector/scraper-runemetrics:a7245cd
+          image: quay.io/bot_detector/scraper-runemetrics:873152d
           resources:
             requests:
               cpu: 100m
@@ -45,4 +45,4 @@ spec:
             - name: KAFKA_HOST
               value: kafka-service.kafka.svc:9092
             - name: SESSION_TIMEOUT
-              value: "60"
+              value: '60'

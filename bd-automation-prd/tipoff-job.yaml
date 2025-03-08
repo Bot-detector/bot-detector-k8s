@@ -32,18 +32,12 @@ spec:
                     topologyKey: kubernetes.io/hostname
           containers:
             - name: bd-prd-automation
-              image: quay.io/bot_detector/bd-automation:35174fd
+              image: quay.io/bot_detector/bd-automation:d803414
               command:
                 - python
                 - src/main.py
               args:
                 - '--run-tipoff'
-              # resources:
-              #   requests:
-              #     cpu: 250m
-              #     memory: 500M
-              #   limits:
-              #     cpu: 1000m
               env:
                 - name: EMAIL_FROM
                   valueFrom:

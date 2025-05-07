@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-runemetrics
-          image: quay.io/bot_detector/scraper-runemetrics:873152d
+          image: quay.io/bot_detector/scraper-runemetrics:07dca9a
           resources:
             requests:
               cpu: 100m

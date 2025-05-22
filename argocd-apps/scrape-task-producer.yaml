@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
-    path: scrape_task_producer
+    path: scrape-task-producer
   destination:
     server: https://kubernetes.default.svc
     namespace: bd-prd

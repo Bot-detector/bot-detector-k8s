@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: scrape_task_producer
+  name: scrape-task-producer
   namespace: bd-prd
 spec:
   selector:
     matchLabels:
-      app: scrape_task_producer
+      app: scrape-task-producer
   replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
       labels:
-        app: scrape_task_producer
+        app: scrape-task-producer
     spec:
       affinity:
         podAntiAffinity:
@@ -27,8 +27,8 @@ spec:
                         - mysql
                 topologyKey: kubernetes.io/hostname
       containers:
-        - name: scrape_task_producer
-          image: quay.io/bot_detector/scrape_task_producer:5a830df
+        - name: scrape-task-producer
+          image: quay.io/bot_detector/scrape-task-producer:5a830df
           resources:
             requests:
               cpu: 100m

@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scrape-task-producer
-          image: quay.io/bot_detector/scrape-task-producer:5a830df
+          image: quay.io/bot_detector/scrape_task_producer:5a830df
           resources:
             requests:
               cpu: 100m

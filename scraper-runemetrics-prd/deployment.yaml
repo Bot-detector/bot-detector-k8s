@@ -49,4 +49,4 @@ spec:
             - name: MAX_CALLS
               value: '15'
             - name: INTERVAL
-              value: 60
+              value: '60'

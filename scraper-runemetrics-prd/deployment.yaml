@@ -47,6 +47,6 @@ spec:
                   key: PROXY_API_KEY
                   name: bd-prd-scraper-secret
             - name: MAX_CALLS
-              value: '15'
+              value: '30'
             - name: INTERVAL
               value: '60'

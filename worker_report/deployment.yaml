@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker_report
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: worker_report
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: worker_report
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: worker_report
+          image: quay.io/bot_detector/report-worker:3252205
+          resources:
+            requests:
+              cpu: 100m
+              memory: 150Mi
+          env:
+            # kafka
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka-service.kafka.svc:9092
+            # database
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: report-worker
+                  key: DATABASE_URL
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: DB_DEBUG
+              value: 0
+

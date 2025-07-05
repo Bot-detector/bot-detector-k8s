@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: highscore-worker
-  replicas: 4
+  replicas: 2
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:6083a72
+          image: quay.io/bot_detector/highscore-worker:a7b3cb7
           resources:
             requests:
               cpu: 100m

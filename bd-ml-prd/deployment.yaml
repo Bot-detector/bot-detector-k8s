@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: bd-prd-ml
-  replicas: 0 # scale down until i moved the data over
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:

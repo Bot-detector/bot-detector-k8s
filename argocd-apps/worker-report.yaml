@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: worker_report
+  name: worker-report
   namespace: argo-cd
 spec:
   project: default
   source:
     repoURL: https://github.com/Bot-detector/bot-detector-k8s.git
     targetRevision: HEAD
-    path: worker_report
+    path: worker-report
   destination:
     server: https://kubernetes.default.svc
     namespace: bd-prd

@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: worker_report
+  name: worker-report
   namespace: bd-prd
 spec:
   selector:
     matchLabels:
-      app: worker_report
+      app: worker-report
   replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
       labels:
-        app: worker_report
+        app: worker-report
     spec:
       affinity:
         podAntiAffinity:
@@ -27,7 +27,7 @@ spec:
                         - mysql
                 topologyKey: kubernetes.io/hostname
       containers:
-        - name: worker_report
+        - name: worker-report
           image: quay.io/bot_detector/report-worker:12c5184
           resources:
             requests:

@@ -42,19 +42,23 @@ spec:
             - name: public-api-port
               containerPort: 5000
           env:
-            - name: KAFKA_HOST
+            - name: KAFKA_BOOTSTRAP_SERVERS
               value: kafka-service.kafka.svc:9092
             - name: env
               value: PRD
             - name: POOL_RECYCLE
-              value: '60'
+              value: '25'
             - name: POOL_TIMEOUT
-              value: '30'
+              value: '25'
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: bd-prd-api-secret
                   key: sql_uri
+            - name: DB_DEBUG
+              value: '0'
+            - name: DEBUG
+              value: '0'
           livenessProbe:
             httpGet:
               path: /

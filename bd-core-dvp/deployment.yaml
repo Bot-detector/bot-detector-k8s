@@ -56,19 +56,3 @@ spec:
               value: kafka-service.kafka.svc:9092
             - name: env
               value: DEV
-          livenessProbe:
-            httpGet:
-              path: /
-              port: dvp-api-port
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /
-              port: dvp-api-port
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            successThreshold: 3
-            timeoutSeconds: 5

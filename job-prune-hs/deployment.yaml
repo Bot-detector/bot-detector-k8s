@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: job-prune-hs
-          image: quay.io/bot_detector/job_prune_hs_data
+          image: quay.io/bot_detector/job_prune_hs_data:a00b60d
           resources:
             requests:
               cpu: 100m

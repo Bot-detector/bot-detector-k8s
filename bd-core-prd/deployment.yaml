@@ -33,7 +33,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-api
-          image: quay.io/bot_detector/bd-core-files:8cb147f
+          image: quay.io/bot_detector/bd-core-files:40f8597
           resources:
             requests:
               cpu: 100m

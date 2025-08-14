@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: job-prune-hs
+  namespace: bd-prd
+spec:
+  schedule: "0 12 * * *"   # Runs every day at 12:00 UTC
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: job-prune-hs
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - mysql
+                    topologyKey: kubernetes.io/hostname
+          containers:
+            - name: job-prune-hs
+              image: quay.io/bot_detector/job_prune_hs_data:a00b60d
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 150Mi
+              env:
+                - name: POOL_TIMEOUT
+                  value: '25'
+                - name: POOL_RECYCLE
+                  value: '25'
+                - name: ENV
+                  value: PRD
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: job-prune-hs
+                      key: DATABASE_URL
+          restartPolicy: OnFailure

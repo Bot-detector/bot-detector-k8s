@@ -30,6 +30,8 @@ spec:
               cpu: 100m
               memory: 150Mi
           env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka-service.kafka.svc:9092
             - name: POOL_TIMEOUT
               value: '25'
             - name: POOL_RECYCLE

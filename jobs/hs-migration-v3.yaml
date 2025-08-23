@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-hs-migration-v3
+  namespace: bd-prd
+spec:
+  backoffLimit: 2   # number of retries before marking failed
+  template:
+    metadata:
+      labels:
+        app: job-hs-migration-v3
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: job-hs-migration-v3
+          image: quay.io/bot_detector/job_hs_migration_v3:a00b60d
+          resources:
+            requests:
+              cpu: 100m
+              memory: 150Mi
+          env:
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: ENV
+              value: PRD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: job-hs-migration-v3
+                  key: DATABASE_URL
+      restartPolicy: OnFailure

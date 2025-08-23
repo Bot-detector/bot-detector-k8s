@@ -4,7 +4,7 @@ metadata:
   name: job-hs-migration-v3
   namespace: bd-prd
 spec:
-  backoffLimit: 2   # number of retries before marking failed
+  backoffLimit: 2
   template:
     metadata:
       labels:
@@ -24,7 +24,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: job-hs-migration-v3
-          image: quay.io/bot_detector/job_hs_migration_v3:a00b60d
+          image: quay.io/bot_detector/job_hs_migration_v3:8330642
           resources:
             requests:
               cpu: 100m

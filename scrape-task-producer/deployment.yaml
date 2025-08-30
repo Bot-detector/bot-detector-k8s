@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: scrape-task-producer
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 1
   template:
     metadata:

@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: highscore-worker
-  replicas: 0
+  replicas: 2
   revisionHistoryLimit: 1
   template:
     metadata:

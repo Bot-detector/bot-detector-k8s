@@ -32,7 +32,7 @@ spec:
                     topologyKey: kubernetes.io/hostname
           containers:
             - name: bd-prd-automation
-              image: quay.io/bot_detector/bd-automation:d803414
+              image: quay.io/bot_detector/bd-automation:4d5210b
               command:
                 - python
                 - src/main.py

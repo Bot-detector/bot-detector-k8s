@@ -20,7 +20,7 @@ spec:
       http:
         paths:
           - path: /v1/report
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: bd-prd-api-service

@@ -1,6 +1,35 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: bd-prd-api-report-ingress
+  namespace: bd-prd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/global-rate-limit: '5'
+    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
+    nginx.ingress.kubernetes.io/denylist-source-range: 97.84.45.49
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.prd.osrsbotdetector.com
+      secretName: api-tls
+  rules:
+    - host: api.prd.osrsbotdetector.com
+      http:
+        paths:
+          - path: /v1/report
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: bd-prd-api-ingress
   namespace: bd-prd
   annotations:
@@ -21,21 +50,7 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
-          - path: /v1/feedback
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
-          - path: /v1/hiscore
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
-          # only on v1 api
+          # only on v1 api (core-api)
           - path: /v2/hiscore
             pathType: Prefix
             backend:
@@ -43,34 +58,7 @@ spec:
                 name: bd-prd-api-service
                 port:
                   name: prd-api-port
-          - path: /v1/label
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
-          - path: /v1/player
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
-          - path: /v1/prediction
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
-          - path: /v1/report
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-api-service
-                port:
-                  name: prd-api-port
+          # catch all v1 & v2
           - path: /v1
             pathType: Prefix
             backend:

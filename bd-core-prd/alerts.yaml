@@ -11,7 +11,7 @@ spec:
           annotations:
             description: Too many 5XXs
             summary: More than 5% of all requests returned 5XX, this may require your attention
-          expr: 100 * ( sum(nginx_ingress_controller_requests{status=~"5.+", ingress="bd-prd-api-ingress"}) / sum(nginx_ingress_controller_requests{ingress="bd-prd-api-ingress"}) ) > 5
+          expr: 100 * ( sum(nginx_ingress_controller_requests{status=~"5.+", ingress="bd-prd-api-report-ingress"}) / sum(nginx_ingress_controller_requests{ingress="bd-prd-api-report-ingress"}) ) > 5
           for: 1m
           labels:
             severity: warning
@@ -19,7 +19,7 @@ spec:
           annotations:
             description: Too many 4XXs
             summary: More than 5% of all requests returned 4XX, this may require your attention
-          expr: 100 * ( sum(nginx_ingress_controller_requests{status=~"4.+", ingress="bd-prd-api-ingress"}) / sum(nginx_ingress_controller_requests{ingress="bd-prd-api-ingress"}) ) > 5
+          expr: 100 * ( sum(nginx_ingress_controller_requests{status=~"4.+", ingress="bd-prd-api-report-ingress"}) / sum(nginx_ingress_controller_requests{ingress="bd-prd-api-report-ingress"}) ) > 5
           for: 1m
           labels:
             severity: warning
@@ -27,7 +27,8 @@ spec:
           annotations:
             description: Request rate is too low
             summary: The request rate to the API ingress is 5 or less requests per second over the past 2 minutes
-          expr: sum(irate(nginx_ingress_controller_requests{ingress=~"bd-prd-api-ingress"}[1m])) <= 5
+          expr: sum(irate(nginx_ingress_controller_requests{ingress=~"bd-prd-api-report-ingress"}[1m])) <= 5
           for: 1m
           labels:
             severity: warning
+

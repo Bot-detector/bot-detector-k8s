@@ -33,7 +33,7 @@ spec:
             - name: prd-web-port
               containerPort: 8000
           env:
-            - name: TOKEN
+            - name: BD_TOKEN
               valueFrom:
                 secretKeyRef:
                   key: TOKEN

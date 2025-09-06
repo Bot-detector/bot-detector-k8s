@@ -8,6 +8,6 @@ spec:
     app: bd-prd-web
   ports:
     - name: prd-web-port
-      port: 8000
+      port: 5000
       protocol: TCP
       targetPort: prd-web-port

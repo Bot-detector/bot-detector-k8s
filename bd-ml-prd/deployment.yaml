@@ -29,18 +29,26 @@ spec:
       containers:
         - name: bd-prd-ml
           image: quay.io/bot_detector/bd-ml:5fbbd44
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 250m
+          ports:
+            - containerPort: 5000
+              name: ml-api-port
           env:
-            - name: token
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: http://minio:9000
+            - name: MODEL_URIS
+              value: {"multi_model_v1":"s3://models/m-a5a92f202d7945c0bb6584993d0242ac/artifacts"}
+            - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  key: token
-                  name: bd-prd-ml-secret
-            - name: secret_token
+                  name: minio-ml-api
+                  key: username
+            - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: secret_token
-                  name: bd-prd-ml-secret
-            - name: private_api
-              value: http://private-api-svc.bd-prd.svc:5000
-            - name: detector_api
-              value: http://bd-dvp-api-service.bd-dvp.svc:5000
+                  name: minio-ml-api
+                  key: password
+            

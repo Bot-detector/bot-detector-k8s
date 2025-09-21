@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:bc146f2
+          image: quay.io/bot_detector/bd-ml:d93d606
           resources:
             requests:
               memory: 500Mi

@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-ml
-          image: quay.io/bot_detector/bd-ml:5fbbd44
+          image: quay.io/bot_detector/bd-ml:bc146f2
           resources:
             requests:
               memory: 500Mi
@@ -40,7 +40,8 @@ spec:
             - name: MLFLOW_S3_ENDPOINT_URL
               value: http://minio:9000
             - name: MODEL_URIS
-              value: {"multi_model_v1":"s3://models/m-a5a92f202d7945c0bb6584993d0242ac/artifacts"}
+              value:
+                multi_model_v1: s3://models/m-a5a92f202d7945c0bb6584993d0242ac/artifacts
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -51,4 +52,3 @@ spec:
                 secretKeyRef:
                   name: minio-ml-api
                   key: password
-            

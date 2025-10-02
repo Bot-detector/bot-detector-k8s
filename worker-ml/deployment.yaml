@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-ml
-          image: quay.io/bot_detector/ml-worker:c25fe9a
+          image: quay.io/bot_detector/ml-worker:92ce0a3
           resources:
             requests:
               cpu: 100m

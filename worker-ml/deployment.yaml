@@ -37,9 +37,9 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: kafka-service.kafka.svc:9092
             - name: MAX_MESSAGES
-              value: 10000
+              value: '10000'
             - name: MAX_INTERVAL_MS
-              value: 5000
+              value: '5000'
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -52,6 +52,6 @@ spec:
             - name: DB_DEBUG
               value: '0'
             - name: BASE_URL
-              value: ml-api-svc.bd-prd.svc:5000
+              value: http://ml-api-svc.bd-prd.svc:5000
             - name: MODEL_NAME
               value: multi_model_v1

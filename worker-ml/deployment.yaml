@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: worker-ml
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-ml
-          image: quay.io/bot_detector/ml-worker:e4f80b2
+          image: quay.io/bot_detector/ml-worker:130caa5
           resources:
             requests:
               cpu: 100m

@@ -54,4 +54,4 @@ spec:
             - name: BASE_URL
               value: http://ml-api-svc.bd-prd.svc:5000
             - name: MODEL_NAME
-              value: multi_model_v1
+              value: multi_rf

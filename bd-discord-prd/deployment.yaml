@@ -57,7 +57,7 @@ spec:
                   name: bd-prd-discord-secret
                   key: WEBHOOK
             - name: API_URL
-              value: public-api-svc.bd-prd.svc:5000
+              value: http://public-api-svc.bd-prd.svc:5000
             - name: SQL_URI
               valueFrom:
                 secretKeyRef:

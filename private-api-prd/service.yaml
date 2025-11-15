@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: private-api-svc
-  namespace: bd-prd
-spec:
-  selector:
-    app: private-api
-  ports:
-    - name: priv-api-port
-      port: 5000
-      protocol: TCP
-      targetPort: priv-api-port
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: private-api-svc
+#   namespace: bd-prd
+# spec:
+#   selector:
+#     app: private-api
+#   ports:
+#     - name: priv-api-port
+#       port: 5000
+#       protocol: TCP
+#       targetPort: priv-api-port

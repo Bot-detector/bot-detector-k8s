@@ -11,3 +11,7 @@ spec:
       port: 5000
       protocol: TCP
       targetPort: public-api-port
+    - name: metrics
+      port: 8000
+      protocol: TCP
+      targetPort: metrics

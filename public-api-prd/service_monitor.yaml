@@ -3,6 +3,8 @@ kind: ServiceMonitor
 metadata:
   name: public-api
   namespace: bd-prd
+  labels:
+    app: public-api
 spec:
   endpoints:
     - path: /

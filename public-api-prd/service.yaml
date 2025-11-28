@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: public-api-svc
   namespace: bd-prd
+  labels:
+    app: public-api
 spec:
   selector:
     app: public-api

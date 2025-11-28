@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: pub-api-ingress
   namespace: bd-prd
+  labels:
+    app: public-api
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M

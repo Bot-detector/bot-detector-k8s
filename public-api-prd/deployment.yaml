@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: public-api
   namespace: bd-prd
+  labels:
+    app: public-api
 spec:
   strategy:
     rollingUpdate:

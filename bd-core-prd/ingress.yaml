@@ -26,6 +26,13 @@ spec:
                 name: bd-prd-api-service
                 port:
                   name: prd-api-port
+          - path: /v2/report
+            pathType: Exact
+            backend:
+              service:
+                name: public-api-svc
+                port:
+                  name: public-api-port
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

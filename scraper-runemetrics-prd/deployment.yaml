@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-runemetrics
-          image: quay.io/bot_detector/scraper-runemetrics:5c7b031
+          image: quay.io/bot_detector/scraper-runemetrics:6f2d0d6
           resources:
             requests:
               cpu: 100m
@@ -37,7 +37,7 @@ spec:
             - name: metrics
               containerPort: 8000
           env:
-            - name: KAFKA_BOOTSTRAP_SERVERS
+            - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
             - name: PROXY_API_KEY
               valueFrom:

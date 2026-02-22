@@ -35,7 +35,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: public-api
-          image: quay.io/bot_detector/public-api:e7c84f8
+          image: quay.io/bot_detector/public-api:6f2d0d6
           resources:
             requests:
               cpu: 150m
@@ -46,7 +46,7 @@ spec:
             - name: metrics
               containerPort: 8000
           env:
-            - name: KAFKA_BOOTSTRAP_SERVERS
+            - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
             - name: env
               value: PRD

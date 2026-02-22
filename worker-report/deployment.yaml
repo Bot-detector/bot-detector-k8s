@@ -28,13 +28,13 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-report
-          image: quay.io/bot_detector/report-worker:a9a48eb
+          image: quay.io/bot_detector/report-worker:6f2d0d6
           resources:
             requests:
               cpu: 100m
               memory: 150Mi
           env:
-            - name: KAFKA_BOOTSTRAP_SERVERS
+            - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
             - name: DATABASE_URL
               valueFrom:

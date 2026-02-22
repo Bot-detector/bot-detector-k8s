@@ -46,6 +46,8 @@ spec:
             - name: metrics
               containerPort: 8000
           env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka-service.kafka.svc:9092
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
             - name: env

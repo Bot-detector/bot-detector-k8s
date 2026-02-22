@@ -36,7 +36,7 @@ spec:
             limits:
               cpu: 1
           env:
-            - name: KAFKA_BOOTSTRAP_SERVERS
+            - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
             - name: POOL_TIMEOUT
               value: '25'

@@ -5,7 +5,7 @@ metadata:
   namespace: bd-prd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    nginx.ingress.kubernetes.io/global-rate-limit: "5"
+    nginx.ingress.kubernetes.io/global-rate-limit: '5'
     nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
     nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
     nginx.ingress.kubernetes.io/denylist-source-range: "97.84.45.49, 45.165.86.233"
@@ -19,6 +19,13 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
+          - path: /v1/report
+            pathType: Exact
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
           - path: /v2/report
             pathType: Exact
             backend:
@@ -36,7 +43,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/proxy-body-size: 1M
     nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
-    nginx.ingress.kubernetes.io/global-rate-limit: "100"
+    nginx.ingress.kubernetes.io/global-rate-limit: '100'
     nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
     nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
     nginx.ingress.kubernetes.io/denylist-source-range: 97.84.45.49
@@ -50,8 +57,16 @@ spec:
     - host: api.prd.osrsbotdetector.com
       http:
         paths:
-          # only legacy path, for the website
-          - path: /site
+          # only on v1 api (core-api)
+          - path: /v2/hiscore
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-api-service
+                port:
+                  name: prd-api-port
+          # catch all v1 & v2
+          - path: /v1
             pathType: Prefix
             backend:
               service:
@@ -69,6 +84,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: public-api-svc
+                name: bd-prd-api-service
                 port:
-                  name: public-api-port
+                  name: prd-api-port

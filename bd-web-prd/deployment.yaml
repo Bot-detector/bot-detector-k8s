@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-web
-          image: quay.io/bot_detector/bd-web:71656f7
+          image: quay.io/bot_detector/bd-web:56a52f6
           ports:
             - name: prd-web-port
               containerPort: 5000

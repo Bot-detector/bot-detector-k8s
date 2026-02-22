@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: highscore-worker
-          image: quay.io/bot_detector/highscore-worker:6f2d0d6
+          image: quay.io/bot_detector/highscore-worker:075cdba
           resources:
             requests:
               cpu: 100m

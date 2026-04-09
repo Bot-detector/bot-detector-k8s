@@ -63,7 +63,7 @@ spec:
                 secretKeyRef:
                   name: bd-prd-discord-secret
                   key: API_URL
-            - name: SQL_URI
+            - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: bd-prd-discord-secret

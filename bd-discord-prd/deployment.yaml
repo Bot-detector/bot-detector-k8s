@@ -38,6 +38,8 @@ spec:
           env:
             - name: OSRS_ITEMS_USER_AGENT
               value: "https://discord.gg/JCAGpcjbfP"
+            - name: DEBUG
+              value: "true"
             - name: DISCORD_TOKEN
               valueFrom:
                 secretKeyRef:

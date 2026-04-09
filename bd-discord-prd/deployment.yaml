@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:186b878
+          image: quay.io/bot_detector/bd-discord-bot:008afbe
           resources:
             requests:
               cpu: 100m
@@ -36,7 +36,9 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: TOKEN
+            - name: OSRS_ITEMS_USER_AGENT
+              value: "https://discord.gg/JCAGpcjbfP"
+            - name: DISCORD_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: bd-prd-discord-secret

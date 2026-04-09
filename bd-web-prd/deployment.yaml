@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bd-prd-web
+  name: bd-prd-discord
   namespace: bd-prd
 spec:
   selector:
     matchLabels:
-      app: bd-prd-web
+      app: bd-prd-discord
   replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:
       labels:
-        app: bd-prd-web
+        app: bd-prd-discord
     spec:
       affinity:
         podAntiAffinity:
@@ -27,14 +27,42 @@ spec:
                         - mysql
                 topologyKey: kubernetes.io/hostname
       containers:
-        - name: bd-prd-web
-          image: quay.io/bot_detector/bd-web:211570f
+        - name: bd-prd-discord
+          image: quay.io/bot_detector/bd-discord-bot:186b878
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
           ports:
-            - name: prd-web-port
-              containerPort: 8000
+            - containerPort: 3000
           env:
-            - name: BD_TOKEN
+            - name: TOKEN
               valueFrom:
                 secretKeyRef:
+                  name: bd-prd-discord-secret
                   key: TOKEN
-                  name: bd-prd-web-secret
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-discord-secret
+                  key: API_TOKEN
+            - name: COMMAND_PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-discord-secret
+                  key: COMMAND_PREFIX
+            - name: WEBHOOK
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-discord-secret
+                  key: WEBHOOK
+            - name: API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-discord-secret
+                  key: API_URL
+            - name: SQL_URI
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-discord-secret
+                  key: SQL_URI

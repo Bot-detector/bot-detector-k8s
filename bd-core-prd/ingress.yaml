@@ -91,7 +91,7 @@ spec:
   tls:
     - hosts:
         - api-v1.prd.osrsbotdetector.com
-      secretName: api-tls
+      secretName: api-v1-tls
   rules:
     - host: api-v1.prd.osrsbotdetector.com
       http:

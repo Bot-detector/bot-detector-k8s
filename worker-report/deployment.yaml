@@ -28,16 +28,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-report
-          image: quay.io/bot_detector/report-worker:f1453a3
+          image: quay.io/bot_detector/report-worker:9fa5bac
           resources:
             requests:
               cpu: 100m
               memory: 150Mi
           env:
-            # components/bot_detector/event_queue/adapters/kafka/settings.py
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092
-            # components/bot_detector/database/core.py
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -49,8 +47,7 @@ spec:
               value: '25'
             - name: DB_DEBUG
               value: '0'
-            # bases/bot_detector/worker_report/settings.py
             - name: MAX_INTERVAL_MS
-              value: "30000"
+              value: '30000'
             - name: MAX_BATCH_SIZE
-              value: "10000"
+              value: '10000'

@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: bd-prd-discord
-          image: quay.io/bot_detector/bd-discord-bot:2815522
+          image: quay.io/bot_detector/bd-discord-bot:163e074
           resources:
             requests:
               cpu: 100m

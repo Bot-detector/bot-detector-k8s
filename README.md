@@ -1,6 +1,20 @@
 # bot-detector-k8s
 copy paste the application.yaml in argoCD
 
+## Repo layout
+
+Each workload lives in its own directory at the repo root, containing
+a `deployment.yaml` (or `cronjob.yaml` / `job.yaml`) and, if it needs
+secrets, a `*.sops.yaml` file:
+
+```
+<workload-name>/
+  deployment.yaml
+  secret.sops.yaml     # optional, encrypted
+jobs/
+  <job-name>.yaml      # CronJobs and one-shot Jobs
+```
+
 ## Secrets
 
 Workloads consume a `DATABASE_URL` (and a few service-specific keys) from
@@ -15,8 +29,18 @@ The MySQL service is `mysql.database.svc:3306` (Service `mysql` in namespace
 `database`). The connection string format is:
 
 ```
-mysql+asyncmy://<user>:<password>@mysql.database.svc:3306/playerdata
+mysql+asyncmy://<db-user>:<db-password>@mysql.database.svc:3306/playerdata
 ```
+
+Throughout this guide, replace:
+
+| Placeholder | Meaning |
+| --- | --- |
+| `<workload-name>` | k8s Deployment/Job/CronJob name, e.g. `ban-migration-worker`, `job-prune-reports` |
+| `<db-user>` | MySQL user, e.g. `ban-migration`, `job-prune-reports` |
+| `<db-password>` | That user's password |
+| `<namespace>` | k8s namespace, almost always `bd-prd` |
+| `<secret-dir>` | Directory holding the workload's manifests, e.g. `worker-ban-migration`, `jobs` |
 
 ### Prerequisites
 
@@ -33,7 +57,7 @@ Verify before you start:
 
 ```bash
 kubectl config current-context
-kubectl get ns bd-prd database
+kubectl get ns <namespace> database
 kubectl -n database get svc mysql
 sops --version           # only needed for the SOPS path
 ```
@@ -43,71 +67,59 @@ sops --version           # only needed for the SOPS path
 Creates the secret live in the cluster. Nothing is written to Git.
 
 ```bash
-# Set these in your shell (avoids leaking the URL into shell history files)
-DB_URL_PRUNE='mysql+asyncmy://job-prune-reports:PASSWORD@mysql.database.svc:3306/playerdata'
-DB_URL_BACKFILL='mysql+asyncmy://job-backfill-banned:PASSWORD@mysql.database.svc:3306/playerdata'
+# Set in your shell to avoid leaking the URL into shell history files
+DB_URL='mysql+asyncmy://<db-user>:<db-password>@mysql.database.svc:3306/playerdata'
 
-kubectl create secret generic job-prune-reports \
-  --namespace=bd-prd \
-  --from-literal=DATABASE_URL="$DB_URL_PRUNE"
-
-kubectl create secret generic job-backfill-banned \
-  --namespace=bd-prd \
-  --from-literal=DATABASE_URL="$DB_URL_BACKFILL"
+kubectl create secret generic <workload-name> \
+  --namespace=<namespace> \
+  --from-literal=DATABASE_URL="$DB_URL"
 ```
 
 Verify:
 
 ```bash
-kubectl -n bd-prd get secret job-prune-reports job-backfill-banned
-kubectl -n bd-prd get secret job-prune-reports -o jsonpath='{.data.DATABASE_URL}' | base64 -d && echo
+kubectl -n <namespace> get secret <workload-name>
+kubectl -n <namespace> get secret <workload-name> -o jsonpath='{.data.DATABASE_URL}' | base64 -d && echo
 ```
 
 Update an existing opaque secret in place:
 
 ```bash
-kubectl -n bd-prd create secret generic job-prune-reports \
-  --from-literal=DATABASE_URL="$DB_URL_PRUNE" --dry-run=client -o yaml | kubectl apply -f -
+kubectl -n <namespace> create secret generic <workload-name> \
+  --from-literal=DATABASE_URL="$DB_URL" --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 ### Option 2 — SOPS-encrypted secret (committed, ArgoCD-reconciled)
 
-Produces an encrypted manifest checked into this repo under `jobs/`. The
-repo's `.sops.yaml` rule encrypts everything except `apiVersion`, `metadata`,
-`kind`, and `type`, using the project `age` recipient.
+Produces an encrypted manifest checked into this repo alongside the
+workload's other manifests. The repo's `.sops.yaml` rule encrypts everything
+except `apiVersion`, `metadata`, `kind`, and `type`, using the project
+`age` recipient.
 
 #### Step 1 — generate the plaintext manifest with `kubectl --dry-run`
 
 ```bash
-DB_URL_PRUNE='mysql+asyncmy://job-prune-reports:PASSWORD@mysql.database.svc:3306/playerdata'
-DB_URL_BACKFILL='mysql+asyncmy://job-backfill-banned:PASSWORD@mysql.database.svc:3306/playerdata'
+DB_URL='mysql+asyncmy://<db-user>:<db-password>@mysql.database.svc:3306/playerdata'
 
-kubectl create secret generic job-prune-reports \
-  --namespace=bd-prd \
+kubectl create secret generic <workload-name> \
+  --namespace=<namespace> \
   --type=Opaque \
-  --from-literal=DATABASE_URL="$DB_URL_PRUNE" \
-  --dry-run=client -o yaml > jobs/job-prune-reports.sops.yaml
-
-kubectl create secret generic job-backfill-banned \
-  --namespace=bd-prd \
-  --type=Opaque \
-  --from-literal=DATABASE_URL="$DB_URL_BACKFILL" \
-  --dry-run=client -o yaml > jobs/job-backfill-banned.sops.yaml
+  --from-literal=DATABASE_URL="$DB_URL" \
+  --dry-run=client -o yaml > <secret-dir>/secret.sops.yaml
 ```
 
 #### Step 2 — encrypt in place with SOPS
 
 ```bash
-sops --encrypt --in-place jobs/job-prune-reports.sops.yaml
-sops --encrypt --in-place jobs/job-backfill-banned.sops.yaml
+sops --encrypt --in-place <secret-dir>/secret.sops.yaml
 ```
 
-After this step the files contain `ENC[AES256_GCM,...]` values and a `sops:`
+After this step the file contains `ENC[AES256_GCM,...]` values and a `sops:`
 block listing the `age` recipient — safe to commit. Verify quickly:
 
 ```bash
-grep -L 'sops:' jobs/job-prune-reports.sops.yaml jobs/job-backfill-banned.sops.yaml
-# (no output = both files are encrypted)
+grep -L 'sops:' <secret-dir>/secret.sops.yaml
+# (no output = file is encrypted)
 ```
 
 #### Step 3 — apply to the cluster
@@ -115,11 +127,10 @@ grep -L 'sops:' jobs/job-prune-reports.sops.yaml jobs/job-backfill-banned.sops.y
 Pick one depending on how the cluster is bootstrapped:
 
 ```bash
-# Manual one-off: decrypt in memory, never writes plaintext to disk
-sops --decrypt jobs/job-prune-reports.sops.yaml   | kubectl apply -f -
-sops --decrypt jobs/job-backfill-banned.sops.yaml | kubectl apply -f -
+# Manual one-off: decrypts in memory, never writes plaintext to disk
+sops --decrypt <secret-dir>/secret.sops.yaml | kubectl apply -f -
 
-# ArgoCD + KSOPS: commit the .sops.yaml files and let ArgoCD reconcile.
+# ArgoCD + KSOPS: commit the .sops.yaml file and let ArgoCD reconcile.
 # Make sure the target Application manifest includes the kustomize plugin.
 ```
 
@@ -127,19 +138,37 @@ sops --decrypt jobs/job-backfill-banned.sops.yaml | kubectl apply -f -
 
 ```bash
 # Opens the file in $EDITOR with values decrypted in memory only
-sops jobs/job-prune-reports.sops.yaml
+sops <secret-dir>/secret.sops.yaml
 
 # Or rotate a single value non-interactively
-sops --set '["DATABASE_URL"] "mysql+asyncmy://job-prune-reports:NEW_PW@mysql.database.svc:3306/playerdata"' \
-  jobs/job-prune-reports.sops.yaml
+sops --set '["DATABASE_URL"] "mysql+asyncmy://<db-user>:NEW_PW@mysql.database.svc:3306/playerdata"' \
+  <secret-dir>/secret.sops.yaml
 ```
 
 ### Conventions
 
-- Secret name matches the workload name (`job-prune-reports`, `job-backfill-banned`).
-- Key is `DATABASE_URL`, matching the `secretKeyRef` in the Job/CronJob manifests.
+- Secret name matches the workload name (e.g. Deployment `ban-migration-worker`
+  reads secret `ban-migration-worker`).
+- Key is `DATABASE_URL`, matching the `secretKeyRef` in the workload manifest.
 - SOPS-encrypted files use the `.sops.yaml` suffix to distinguish them from
   plain manifests.
 - Never commit plaintext secrets. The `.sops.yaml` rule has no path filter, so
   any YAML piped through `sops --encrypt` will be encrypted — but it is your
   responsibility to run encryption before `git add`.
+
+## MySQL grants
+
+Every workload runs as a dedicated MySQL user with the minimum grants its
+code path needs. Users and grants are defined upstream in the application
+repo:
+
+- `bot_detector/_infra/_mysql/docker-entrypoint-initdb.d/00_init.sql` — `CREATE USER`
+- `bot_detector/_infra/_mysql/docker-entrypoint-initdb.d/02_grants.sql` — `GRANT` statements, one block per user
+
+To add a new workload's DB user, append to both files mirroring an existing
+block. Verify live grants:
+
+```bash
+kubectl -n database exec -it <mysql-pod> -- mysql -u root -p -e \
+  "SHOW GRANTS FOR '<db-user>'@'%';"
+```

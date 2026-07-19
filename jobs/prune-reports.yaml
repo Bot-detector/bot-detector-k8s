@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: job-prune-reports
+  namespace: bd-prd
+spec:
+  suspend: true
+  schedule: "0 13 * * *"   # Runs every day at 13:00 UTC
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: job-prune-reports
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - mysql
+                    topologyKey: kubernetes.io/hostname
+          containers:
+            - name: job-prune-reports
+              image: quay.io/bot_detector/job_prune_reports:latest
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 150Mi
+              env:
+                - name: POOL_TIMEOUT
+                  value: '25'
+                - name: POOL_RECYCLE
+                  value: '25'
+                - name: ENV
+                  value: PRD
+                - name: REPORT_RETENTION_DAYS
+                  value: '90'
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: job-prune-reports
+                      key: DATABASE_URL
+          restartPolicy: OnFailure

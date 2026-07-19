@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-backfill-banned
+  namespace: bd-prd
+spec:
+  suspend: true
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: job-backfill-banned
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: job-backfill-banned
+          image: quay.io/bot_detector/job_backfill_banned:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 150Mi
+          env:
+            - name: bootstrap_servers
+              value: kafka-service.kafka.svc:9092
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: ENV
+              value: PRD
+            - name: BATCH_SIZE
+              value: '10000'
+            - name: MAX_LAG
+              value: '100000'
+            - name: LAG_SLEEP_SECONDS
+              value: '10'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: job-backfill-banned
+                  key: DATABASE_URL
+      restartPolicy: OnFailure

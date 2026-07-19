@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ban-migration-worker
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: ban-migration-worker
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: ban-migration-worker
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: ban-migration-worker
+          image: quay.io/bot_detector/ban-migration-worker:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 1
+          env:
+            - name: bootstrap_servers
+              value: kafka-service.kafka.svc:9092
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: ENV
+              value: PRD
+            - name: N_WORKERS
+              value: '1'
+            - name: MAX_BATCH_SIZE
+              value: '10000'
+            - name: MAX_INTERVAL_MS
+              value: '1000'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ban-migration-worker
+                  key: DATABASE_URL

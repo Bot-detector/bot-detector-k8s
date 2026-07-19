@@ -4,6 +4,7 @@ metadata:
   name: job-backfill-banned
   namespace: bd-prd
 spec:
+  suspend: true
   backoffLimit: 2
   template:
     metadata:

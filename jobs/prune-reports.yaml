@@ -5,7 +5,7 @@ metadata:
   namespace: bd-prd
 spec:
   suspend: true
-  schedule: "0 13 * * *"   # Runs every day at 13:00 UTC
+  schedule: 0 13 * * *
   jobTemplate:
     spec:
       template:
@@ -47,3 +47,7 @@ spec:
                       name: job-prune-reports
                       key: DATABASE_URL
           restartPolicy: OnFailure
+  template:
+    spec:
+      containers:
+        - image: quay.io/bot_detector/job_prune_reports:e30ca2c

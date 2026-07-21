@@ -27,7 +27,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: job-backfill-banned
-          image: quay.io/bot_detector/job_backfill_banned:7c1b8cb
+          image: quay.io/bot_detector/job_backfill_banned:8b5de88
           resources:
             requests:
               cpu: 100m

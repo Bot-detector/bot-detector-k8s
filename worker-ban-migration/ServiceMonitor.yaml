@@ -5,7 +5,7 @@ metadata:
   namespace: bd-prd
 spec:
   endpoints:
-    - path: /metrics
+    - path: /
       port: metrics
   selector:
     matchLabels:

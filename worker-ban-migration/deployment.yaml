@@ -28,13 +28,16 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: ban-migration-worker
-          image: quay.io/bot_detector/ban-migration-worker:e3a2740
+          image: quay.io/bot_detector/ban-migration-worker:812ad40
           resources:
             requests:
               cpu: 100m
               memory: 200Mi
             limits:
               cpu: 1
+          ports:
+            - name: metrics
+              containerPort: 8000
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

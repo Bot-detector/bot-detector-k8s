@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: highscore-worker
+  namespace: bd-prd
+spec:
+  endpoints:
+    - path: /metrics
+      port: metrics
+      interval: 30s
+      scrapeTimeout: 10s
+  selector:
+    matchLabels:
+      app: highscore-worker

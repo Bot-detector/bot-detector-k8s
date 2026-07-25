@@ -33,6 +33,9 @@ spec:
             requests:
               cpu: 100m
               memory: 150Mi
+          ports:
+            - name: metrics
+              containerPort: 8000
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

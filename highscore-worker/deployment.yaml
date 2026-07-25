@@ -35,6 +35,9 @@ spec:
               memory: 200Mi
             limits:
               cpu: 1
+          ports:
+            - name: metrics
+              containerPort: 8000
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

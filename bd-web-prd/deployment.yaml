@@ -30,7 +30,9 @@ spec:
         - name: bd-prd-web
           image: quay.io/bot_detector/bd-web:f976471
           ports:
-            - name: prd-web-port
+            - name: website
+              containerPort: 5000
+            - name: metrics
               containerPort: 8000
           env:
             - name: BD_TOKEN

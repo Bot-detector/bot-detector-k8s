@@ -5,35 +5,15 @@ metadata:
   namespace: bd-prd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - web.prd.osrsbotdetector.com
-        - www.osrsbotdetector.com
         - osrsbotdetector.com
+        - www.osrsbotdetector.com
       secretName: web-tls
   rules:
-    - host: web.prd.osrsbotdetector.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-web-service
-                port:
-                  name: prd-web-port
-    - host: www.osrsbotdetector.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: bd-prd-web-service
-                port:
-                  name: prd-web-port
     - host: osrsbotdetector.com
       http:
         paths:
@@ -43,4 +23,34 @@ spec:
               service:
                 name: bd-prd-web-service
                 port:
-                  name: prd-web-port
+                  name: website
+---
+# rate-limited path, separate ingress: nginx rate-limit annotations apply per ingress resource
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bd-prd-web-ingress-account-search
+  namespace: bd-prd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/global-rate-limit: "10"
+    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - osrsbotdetector.com
+        - www.osrsbotdetector.com
+      secretName: web-tls
+  rules:
+    - host: osrsbotdetector.com
+      http:
+        paths:
+          - path: /account-search
+            pathType: Prefix
+            backend:
+              service:
+                name: bd-prd-web-service
+                port:
+                  name: website

@@ -67,6 +67,6 @@ spec:
             - name: OSRS_ITEMS_USER_AGENT
               value: https://discord.gg/JCAGpcjbfP
             - name: SYNC_GUILD_ID
-              value: 817916789668708384
+              value: '817916789668708384'
             - name: DEBUG
               value: 'true'

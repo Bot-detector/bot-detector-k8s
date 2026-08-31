@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scrape-task-producer
+  namespace: bd-prd
+  labels:
+    app: scrape-task-producer
+spec:
+  type: ClusterIP
+  selector:
+    app: scrape-task-producer
+  ports:
+    - name: metrics # alias listening
+      port: 8000 #  [listening] the container port exposed by a pod or deployment,
+      protocol: TCP
+      targetPort: metrics # [sending] the port on the host machine that traffic is directed to

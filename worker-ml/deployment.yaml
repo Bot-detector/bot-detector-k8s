@@ -28,11 +28,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-ml
-          image: quay.io/bot_detector/ml-worker:6f2d0d6
+          image: quay.io/bot_detector/ml-worker:bef0c30
           resources:
             requests:
               cpu: 100m
               memory: 150Mi
+          ports:
+            - name: metrics
+              containerPort: 8000
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

@@ -57,10 +57,6 @@ spec:
                   key: sql_uri
             - name: DB_DEBUG
               value: '0'
-            # disable the static dev keys (changeme-*) in prd; auth is
-            # discord-token + apiUser permissions from the database
-            - name: API_KEYS
-              value: '{}'
           livenessProbe:
             httpGet:
               path: /

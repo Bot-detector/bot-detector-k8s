@@ -14,7 +14,7 @@ spec:
   selector:
     matchLabels:
       app: firehose
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 1
   template:
     metadata:

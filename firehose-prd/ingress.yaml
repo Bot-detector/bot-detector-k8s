@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: firehose-ingress
+  namespace: bd-prd
+  labels:
+    app: firehose
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/proxy-body-size: 1M
+    # keep long-lived websocket connections from being cut by idle timeouts
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/global-rate-limit: "100"
+    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/global-rate-limit-key: $remote_addr
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - firehose.osrsbotdetector.com
+      secretName: firehose-tls
+  rules:
+    - host: firehose.osrsbotdetector.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: firehose
+                port:
+                  name: firehose-port

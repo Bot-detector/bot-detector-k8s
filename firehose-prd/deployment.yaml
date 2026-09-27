@@ -43,6 +43,8 @@ spec:
           ports:
             - name: firehose-port
               containerPort: 5000
+            - name: metrics
+              containerPort: 8000
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

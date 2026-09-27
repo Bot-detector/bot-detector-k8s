@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firehose
+  namespace: bd-prd
+  labels:
+    app: firehose
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: firehose
+  replicas: 2
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: firehose
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: firehose
+          image: quay.io/bot_detector/firehose:990f6ea
+          resources:
+            requests:
+              cpu: 150m
+              memory: 500M
+          ports:
+            - name: firehose-port
+              containerPort: 5000
+            - name: metrics
+              containerPort: 8000
+          env:
+            - name: bootstrap_servers
+              value: kafka-service.kafka.svc:9092
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: bd-prd-api-secret
+                  key: sql_uri
+            - name: DB_DEBUG
+              value: '0'
+          livenessProbe:
+            httpGet:
+              path: /
+              port: firehose-port
+            initialDelaySeconds: 90
+            periodSeconds: 15
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: firehose-port
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            successThreshold: 3
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /
+              port: firehose-port
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 6

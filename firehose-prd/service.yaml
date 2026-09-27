@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: firehose
+  namespace: bd-prd
+  labels:
+    app: firehose
+spec:
+  type: ClusterIP
+  selector:
+    app: firehose
+  ports:
+    - name: firehose-port # alias listening
+      port: 5000 #  [listening] the container port exposed by a pod or deployment,
+      protocol: TCP
+      targetPort: firehose-port # [sending] the port on the host machine that traffic is directed to
+    - name: metrics
+      port: 8000
+      protocol: TCP
+      targetPort: metrics

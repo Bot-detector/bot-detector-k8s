@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-highscore
-          image: quay.io/bot_detector/scraper-highscore:a7df394
+          image: quay.io/bot_detector/scraper-highscore:81149d9
           resources:
             requests:
               cpu: 200m

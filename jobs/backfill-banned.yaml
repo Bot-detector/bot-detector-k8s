@@ -6,7 +6,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: Replace=true
 spec:
-  # suspend: true
   backoffLimit: 2
   template:
     metadata:
@@ -27,7 +26,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: job-backfill-banned
-          image: quay.io/bot_detector/job_backfill_banned:8b5de88
+          image: quay.io/bot_detector/job_backfill_banned:a7df394
           resources:
             requests:
               cpu: 100m

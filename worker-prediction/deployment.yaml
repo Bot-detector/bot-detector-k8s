@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-prediction
+  namespace: bd-prd
+spec:
+  selector:
+    matchLabels:
+      app: worker-prediction
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: worker-prediction
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - mysql
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: worker-prediction
+          image: quay.io/bot_detector/prediction-worker:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 150Mi
+          ports:
+            - name: metrics
+              containerPort: 8000
+          env:
+            - name: bootstrap_servers
+              value: kafka-service.kafka.svc:9092
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: prediction-worker
+                  key: DATABASE_URL
+            - name: POOL_TIMEOUT
+              value: '25'
+            - name: POOL_RECYCLE
+              value: '25'
+            - name: DB_DEBUG
+              value: '0'
+            - name: MAX_INTERVAL_MS
+              value: '30000'
+            - name: MAX_BATCH_SIZE
+              value: '10000'
+            - name: N_WORKERS
+              value: '1'

@@ -42,7 +42,7 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: prediction-worker
+                  name: ml-worker
                   key: DATABASE_URL
             - name: POOL_TIMEOUT
               value: '25'

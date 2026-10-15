@@ -8,6 +8,9 @@ metadata:
 spec:
   backoffLimit: 2
   ttlSecondsAfterFinished: 3600
+  selector:
+    matchLabels:
+      app: job-kafka-topic-retention
   template:
     metadata:
       labels:

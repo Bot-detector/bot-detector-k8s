@@ -50,14 +50,6 @@ spec:
               value: PLAINTEXT://kafka-service.kafka.svc:9092,EXTERNAL://localhost:9094
             - name: KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE
               value: "false"
-            - name: KAFKA_CFG_LOG_RETENTION_MS
-              value: "86400000" # 1d
-            - name: KAFKA_CFG_LOG_RETENTION_BYTES
-              value: "250000000" # 250MB per partition (2GB topic / 8 partitions, worst split)
-            - name: KAFKA_CFG_LOG_SEGMENT_MS
-              value: "3600000" # 1h
-            - name: KAFKA_CFG_LOG_SEGMENT_BYTES
-              value: "100000000" # 100MB
             # this config is needed for kraft?
             # - name: KAFKA_CFG_NODE_ID
             #   value: 0

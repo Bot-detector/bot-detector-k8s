@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-kafka-topic-retention
+  namespace: kafka
+spec:
+  schedule: "0 3 * * *"
+  timeZone: UTC
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app: job-kafka-topic-retention
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: kafka-topic-retention
+              image: bitnamilegacy/kafka:3.5.1-debian-11-r3
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  memory: 512Mi
+              command: ["/bin/bash", "/scripts/retention.sh"]
+              volumeMounts:
+                - name: scripts
+                  mountPath: /scripts
+          volumes:
+            - name: scripts
+              configMap:
+                name: kafka-topic-retention
+                defaultMode: 0755

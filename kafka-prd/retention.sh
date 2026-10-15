@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BOOTSTRAP=kafka-service.kafka.svc:9092
+BIN=${BIN:-/opt/bitnami/kafka/bin}
+
+MB=1000000
+GB=$((1000*MB))
+HOUR=$((60*60*1000))
+DAY=$((24*HOUR))
+
+BUDGET=$((2*GB)) # max 2GB per topic
+
+# retention: 1d, 2GB per topic split across partitions, segments 1h / 100MB
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic data.to_predict --partitions 4 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/4)),segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic players.banned --partitions 4 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/4)),segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic players.not_found --partitions 8 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/8)),segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic players.scraped --partitions 4 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/4)),segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic players.to_scrape --partitions 4 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/4)),segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic predictions.to_insert --partitions 1 \
+  --config retention.ms=$DAY,retention.bytes=$BUDGET,segment.ms=$HOUR,segment.bytes=$((100*MB))
+
+"$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --alter --topic reports.to_insert --partitions 4 \
+  --config retention.ms=$DAY,retention.bytes=$((BUDGET/4)),segment.ms=$HOUR,segment.bytes=$((100*MB))

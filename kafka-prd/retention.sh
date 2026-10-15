@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BOOTSTRAP=kafka-service.kafka.svc:9092
+CONFIG="retention.ms=604800000,retention.bytes=1000000000,segment.ms=86400000,segment.bytes=100000000"
+BIN=/opt/bitnami/kafka/bin
+
+TOPICS="$("$BIN"/kafka-topics.sh --bootstrap-server "$BOOTSTRAP" --list | grep -v '^__' || true)"
+
+for TOPIC in $TOPICS; do
+  echo "applying retention to $TOPIC"
+  "$BIN"/kafka-configs.sh --bootstrap-server "$BOOTSTRAP" \
+    --alter --entity-type topics --entity-name "$TOPIC" \
+    --add-config "$CONFIG"
+done

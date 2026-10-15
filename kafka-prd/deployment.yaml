@@ -51,11 +51,11 @@ spec:
             - name: KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE
               value: "false"
             - name: KAFKA_CFG_LOG_RETENTION_MS
-              value: "604800000" # 7d
-            - name: KAFKA_CFG_LOG_RETENTION_BYTES
-              value: "1000000000" # 1GB per partition
-            - name: KAFKA_CFG_LOG_SEGMENT_MS
               value: "86400000" # 1d
+            - name: KAFKA_CFG_LOG_RETENTION_BYTES
+              value: "125000000" # 125MB per partition (1GB topic / 8 partitions, worst split)
+            - name: KAFKA_CFG_LOG_SEGMENT_MS
+              value: "3600000" # 1h
             - name: KAFKA_CFG_LOG_SEGMENT_BYTES
               value: "100000000" # 100MB
             # this config is needed for kraft?

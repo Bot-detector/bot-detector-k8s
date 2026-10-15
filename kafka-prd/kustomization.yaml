@@ -7,7 +7,7 @@ resources:
   - volume.yaml
   - deployment.yaml
   - service.yaml
-  - topic-retention-job.yaml
+  - topic-retention-cronjob.yaml
 
 configMapGenerator:
   - name: kafka-topic-retention

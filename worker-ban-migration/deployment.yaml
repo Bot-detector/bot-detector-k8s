@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: ban-migration-worker
-          image: quay.io/bot_detector/ban-migration-worker:81149d9
+          image: quay.io/bot_detector/ban-migration-worker:f1375c0
           resources:
             requests:
               cpu: 100m

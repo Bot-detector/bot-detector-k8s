@@ -36,21 +36,6 @@ spec:
           ports:
             - name: metrics
               containerPort: 8000
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - |
-                    # daily restart: kill the container at the next 23:00 UTC
-                    now=$(date +%s)
-                    target=$(date -d "23:00" +%s)
-                    if [ "$target" -le "$now" ]; then
-                      target=$(date -d "tomorrow 23:00" +%s)
-                    fi
-                    sleep $((target - now))
-                    kill -TERM 1
           env:
             - name: bootstrap_servers
               value: kafka-service.kafka.svc:9092

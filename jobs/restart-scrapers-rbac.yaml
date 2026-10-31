@@ -10,9 +10,16 @@ metadata:
   name: restart-scrapers
   namespace: bd-prd
 rules:
+  # mutating access, restricted to the two scraper deployments
   - apiGroups: ['apps']
     resources: ['deployments']
-    verbs: ['get', 'list', 'patch']
+    resourceNames: ['scraper-highscore', 'scraper-runemetrics']
+    verbs: ['get', 'patch']
+  # `kubectl rollout status` watches deployments by label selector (a collection
+  # request), which RBAC cannot scope with resourceNames; read-only
+  - apiGroups: ['apps']
+    resources: ['deployments']
+    verbs: ['watch']
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

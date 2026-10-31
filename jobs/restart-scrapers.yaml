@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-restart-scrapers
+  namespace: bd-prd
+spec:
+  schedule: "0 23 * * *"
+  timeZone: UTC
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app: job-restart-scrapers
+        spec:
+          serviceAccountName: restart-scrapers
+          restartPolicy: OnFailure
+          containers:
+            - name: kubectl
+              image: registry.k8s.io/kubectl:v1.33.2
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  memory: 128Mi
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  kubectl -n bd-prd rollout restart deployment/scraper-highscore
+                  kubectl -n bd-prd rollout restart deployment/scraper-runemetrics
+                  kubectl -n bd-prd rollout status deployment/scraper-highscore --timeout=10m
+                  kubectl -n bd-prd rollout status deployment/scraper-runemetrics --timeout=10m

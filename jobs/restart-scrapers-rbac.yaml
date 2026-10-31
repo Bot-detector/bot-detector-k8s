@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: restart-scrapers
+  namespace: bd-prd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: restart-scrapers
+  namespace: bd-prd
+rules:
+  - apiGroups: ['apps']
+    resources: ['deployments']
+    resourceNames: ['scraper-highscore', 'scraper-runemetrics']
+    verbs: ['get', 'patch']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: restart-scrapers
+  namespace: bd-prd
+subjects:
+  - kind: ServiceAccount
+    name: restart-scrapers
+    namespace: bd-prd
+roleRef:
+  kind: Role
+  name: restart-scrapers
+  apiGroup: rbac.authorization.k8s.io

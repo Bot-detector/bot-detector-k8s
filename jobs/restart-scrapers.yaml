@@ -33,8 +33,4 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - |
-                  kubectl -n bd-prd rollout restart deployment/scraper-highscore
-                  kubectl -n bd-prd rollout restart deployment/scraper-runemetrics
-                  kubectl -n bd-prd rollout status deployment/scraper-highscore --timeout=10m
-                  kubectl -n bd-prd rollout status deployment/scraper-runemetrics --timeout=10m
+                - kubectl -n bd-prd rollout restart deployment/scraper-highscore deployment/scraper-runemetrics

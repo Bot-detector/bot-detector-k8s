@@ -27,7 +27,7 @@ spec:
                     topologyKey: kubernetes.io/hostname
           containers:
             - name: job-prune-reports
-              image: quay.io/bot_detector/job_prune_reports:fb1f624
+              image: quay.io/bot_detector/job_prune_reports:929809a
               resources:
                 requests:
                   cpu: 100m

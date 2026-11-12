@@ -47,7 +47,7 @@ spec:
             - name: SESSION_TIMEOUT
               value: '60'
             - name: FETCH_CONCURRENCY
-              value: "900"
+              value: "600"
             - name: PROCESS_CONCURRENCY
               value: "16"
             - name: CONSUME_BATCH_SIZE

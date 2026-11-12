@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: scraper-highscore
-          image: quay.io/bot_detector/scraper-highscore:f40ba16
+          image: quay.io/bot_detector/scraper-highscore:21ef9ca
           resources:
             requests:
               cpu: 200m
@@ -47,14 +47,14 @@ spec:
             - name: SESSION_TIMEOUT
               value: '60'
             - name: FETCH_CONCURRENCY
-              value: "600"
+              value: '600'
             - name: PROCESS_CONCURRENCY
-              value: "16"
+              value: '16'
             - name: CONSUME_BATCH_SIZE
-              value: "200"
+              value: '200'
             - name: TASK_QUEUE_MAXSIZE
-              value: "2000"
+              value: '2000'
             - name: RESULTS_QUEUE_MAXSIZE
-              value: "2000"
+              value: '2000'
             - name: CONNECTION_LIMIT
-              value: "3600"
+              value: '3600'

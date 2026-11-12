@@ -46,3 +46,15 @@ spec:
               value: kafka-service.kafka.svc:9092
             - name: SESSION_TIMEOUT
               value: '60'
+            - name: FETCH_CONCURRENCY
+              value: "900"
+            - name: PROCESS_CONCURRENCY
+              value: "16"
+            - name: CONSUME_BATCH_SIZE
+              value: "200"
+            - name: TASK_QUEUE_MAXSIZE
+              value: "2000"
+            - name: RESULTS_QUEUE_MAXSIZE
+              value: "2000"
+            - name: CONNECTION_LIMIT
+              value: "3600"

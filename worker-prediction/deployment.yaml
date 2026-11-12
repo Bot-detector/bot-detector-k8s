@@ -28,7 +28,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: worker-prediction
-          image: quay.io/bot_detector/prediction-worker:929809a
+          image: quay.io/bot_detector/prediction-worker:21ef9ca
           resources:
             requests:
               cpu: 100m

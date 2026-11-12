@@ -35,7 +35,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: firehose
-          image: quay.io/bot_detector/firehose:aea8dc6
+          image: quay.io/bot_detector/firehose:21ef9ca
           resources:
             requests:
               cpu: 150m

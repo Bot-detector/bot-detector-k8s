@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: job-broadcaster
+  namespace: bd-prd
+spec:
+  schedule: '0 22 * * *'
+  timeZone: Etc/UTC
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app: job-broadcaster
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - mysql
+                    topologyKey: kubernetes.io/hostname
+          containers:
+            - name: job-broadcaster
+              image: quay.io/bot_detector/job_broadcaster:a860e5d
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 150Mi
+              env:
+                - name: bootstrap_servers
+                  value: kafka-service.kafka.svc:9092
+                - name: POOL_TIMEOUT
+                  value: '25'
+                - name: POOL_RECYCLE
+                  value: '25'
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: job-broadcaster
+                      key: DATABASE_URL
+                - name: GRAVEYARD_WEBHOOK
+                  valueFrom:
+                    secretKeyRef:
+                      name: job-broadcaster
+                      key: GRAVEYARD_WEBHOOK
+          restartPolicy: OnFailure

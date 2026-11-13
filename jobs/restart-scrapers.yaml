@@ -22,7 +22,11 @@ spec:
                 requests:
                   cpu: 100m
                   memory: 150Mi
-              command:
-                - /bin/sh
-                - -c
-                - kubectl -n bd-prd rollout restart deployment/scraper-highscore deployment/scraper-runemetrics
+              # distroless image: no shell, binary is the ENTRYPOINT (/bin/kubectl)
+              args:
+                - -n
+                - bd-prd
+                - rollout
+                - restart
+                - deployment/scraper-highscore
+                - deployment/scraper-runemetrics
